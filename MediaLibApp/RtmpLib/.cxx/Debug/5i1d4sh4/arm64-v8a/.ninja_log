@@ -1,0 +1,10 @@
+# ninja log v5
+13	2081	7265067184781488	librtmp/CMakeFiles/librtmp.dir/amf.c.o	a029196289238d96
+92	2085	7265067184392535	librtmp/CMakeFiles/librtmp.dir/parseurl.c.o	22024278b6b0494c
+109	2086	7265067184392535	librtmp/CMakeFiles/librtmp.dir/hashswf.c.o	b44f282ff20903a
+43	2091	7265067185092018	librtmp/CMakeFiles/librtmp.dir/log.c.o	b0b5ec26ec3acfc7
+1	2125	7265067185490949	CMakeFiles/rtmplib.dir/rtmplib.cpp.o	b9d9900c16c35b27
+24	2203	7265067186308754	librtmp/CMakeFiles/librtmp.dir/rtmp.c.o	6f96757bc582fe2c
+2204	3279	7265067197120047	librtmp/liblibrtmp.a	755f751ae17bdbe4
+3279	3607	7265067200355417	D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/RtmpLib/build/intermediates/cxx/Debug/5i1d4sh4/obj/arm64-v8a/librtmplib.so	ea89537931037ee6
+3	2368	7266675717253401	D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/RtmpLib/build/intermediates/cxx/Debug/5i1d4sh4/obj/arm64-v8a/librtmplib.so	ea89537931037ee6

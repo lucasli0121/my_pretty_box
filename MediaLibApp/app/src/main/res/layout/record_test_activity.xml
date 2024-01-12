@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_item_height_30"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ItemTitleTextStyle"
+            android:text="请在下面书写画线，系统会自动录屏"/>
+    </FrameLayout>
+
+    <com.media.demo.WriteView
+        android:id="@+id/writeView"
+        android:layout_width="@dimen/dimen_item_height_300"
+        android:layout_height="@dimen/dimen_item_height_300"
+        android:layout_gravity="center" />
+</LinearLayout>

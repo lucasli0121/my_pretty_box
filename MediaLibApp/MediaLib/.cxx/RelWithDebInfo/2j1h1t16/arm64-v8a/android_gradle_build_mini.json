@@ -1,0 +1,29 @@
+{
+  "buildFiles": [
+    "D:\\dening_project\\myMedia\\libmyMediaApp\\myMedia\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "E:\\android-sdk-windows\\cmake\\3.22.1\\bin\\ninja.exe",
+      "-C",
+      "D:\\dening_project\\myMedia\\libmyMediaApp\\myMedia\\.cxx\\RelWithDebInfo\\2j1h1t16\\arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "E:\\android-sdk-windows\\cmake\\3.22.1\\bin\\ninja.exe",
+    "-C",
+    "D:\\dening_project\\myMedia\\libmyMediaApp\\myMedia\\.cxx\\RelWithDebInfo\\2j1h1t16\\arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "myMedia::@6890427a1f51a3e7e1df": {
+      "artifactName": "myMedia",
+      "abi": "arm64-v8a",
+      "output": "D:\\dening_project\\myMedia\\libmyMediaApp\\myMedia\\build\\intermediates\\cxx\\RelWithDebInfo\\2j1h1t16\\obj\\arm64-v8a\\libmyMedia.so",
+      "runtimeFiles": [
+        "D:\\dening_project\\myMedia\\libmyMediaApp\\myMedia\\src\\main\\jniLibs\\arm64-v8a\\libyuv.so"
+      ]
+    }
+  }
+}

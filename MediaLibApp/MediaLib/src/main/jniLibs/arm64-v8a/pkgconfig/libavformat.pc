@@ -1,0 +1,14 @@
+prefix=ffout64
+exec_prefix=${prefix}
+libdir=ffout64/lib
+includedir=ffout64/include
+
+Name: libavformat
+Description: FFmpeg container format library
+Version: 58.54.100
+Requires: 
+Requires.private: libavcodec >= 58.105.100, libswresample >= 3.8.100, libavutil >= 56.58.100
+Conflicts:
+Libs: -L${libdir}  -lavformat 
+Libs.private: -lm -lz
+Cflags: -I${includedir}

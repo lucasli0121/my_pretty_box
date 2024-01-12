@@ -1,0 +1,58 @@
+import com.build.config.*
+
+apply plugin: 'com.android.library'
+
+
+android {
+    namespace = "com.meihu.beauty"
+    compileSdk Versions.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion Versions.minSdkVersion
+        targetSdkVersion Versions.targetSdkVersion
+        versionName "4.2.1"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //noinspection GradleCompatible
+    implementation Libs.AndroidX.appcompat
+    //noinspection GradleCompatible
+    implementation Libs.AndroidX.legacy
+    //noinspection GradleCompatible
+    implementation Libs.AndroidX.recyclerview
+
+    implementation "com.alibaba:fastjson:1.1.70.android"
+    implementation "com.github.bumptech.glide:glide:4.9.0"
+    implementation 'com.lzy.net:okgo:3.0.4'
+
+//    implementation(name:'MHSDK-4.2.1', ext:'aar')
+    api(name:'MHSDK-4.2.1', ext:'aar')
+
+    testImplementation Libs.junit
+    androidTestImplementation Libs.AndroidX.Test.Ext.junit
+    androidTestImplementation Libs.AndroidX.Test.espressoCore
+
+}

@@ -1,0 +1,104 @@
+import com.build.config.*
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+
+android {
+    compileSdk Versions.compileSdkVersion
+    namespace 'com.media.demo'
+    defaultConfig {
+        applicationId "com.media.demo"
+        minSdkVersion Versions.minSdkVersion
+        targetSdkVersion Versions.targetSdkVersion
+        versionCode Versions.versionCode
+        versionName Versions.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary true
+        ndk{
+            abiFilters 'arm64-v8a' //'armeabi-v7a'
+        }
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+        freeCompilerArgs = ['-Xjvm-default=all-compatibility']
+    }
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Libs.Compose.kotlinCompilerVersion
+    }
+    repositories {
+        flatDir {
+            dirs '../mhui/libs', 'libs'
+        }
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(include: ['*.aar'], dir: 'aars')
+
+    implementation(platform(Libs.Compose.composeBom))
+    implementation(platform(Libs.Kotlin.kotlinBom))
+    implementation Libs.AndroidX.coreKtx
+    implementation Libs.AndroidX.appcompat
+    implementation Libs.AndroidX.constraintLayout
+    implementation Libs.AndroidX.annotation
+
+    implementation(Libs.Kotlin.kotlinStdlib)
+    implementation Libs.Coroutines.android
+    implementation(Libs.Coroutines.core)
+    implementation(Libs.Coroutines.test)
+
+    implementation(Libs.Compose.runtime)
+    implementation(Libs.Compose.ui)
+    implementation(Libs.Compose.uiUtil)
+    implementation(Libs.Compose.foundation)
+    implementation(Libs.Compose.foundationLayout)
+    implementation(Libs.Compose.material)
+    implementation(Libs.Compose.materialIconsExtended)
+    implementation(Libs.Compose.animation)
+    implementation(Libs.Compose.toolingPreview)
+    implementation(Libs.Compose.tooling)
+    implementation(Libs.Compose.viewBinding)
+    implementation(Libs.Compose.runtimeLivedata)
+
+    implementation Libs.Material.material
+    implementation(Libs.Material.material3)
+
+    implementation(Libs.Utils.blankUtil)
+
+    kapt Libs.Bumptech.compiler
+    implementation(Libs.Bumptech.glide)
+    implementation(Libs.Bumptech.glide_okhttp)
+    implementation(platform(Libs.Http.okHttp3Bom))
+    implementation(Libs.Http.okHttp3)
+    implementation(Libs.Http.okHttpLogging)
+    implementation('com.github.humorousz:FrameSequenceDrawable:1.0.1-SNAPSHOT')
+
+    implementation project(':MediaLib')
+    implementation project(':mhui')
+//    api(name:'MHSDK-4.2.1', ext:'aar')
+
+    testImplementation Libs.junit
+    androidTestImplementation Libs.AndroidX.Test.Ext.junit
+    androidTestImplementation Libs.AndroidX.Test.espressoCore
+}

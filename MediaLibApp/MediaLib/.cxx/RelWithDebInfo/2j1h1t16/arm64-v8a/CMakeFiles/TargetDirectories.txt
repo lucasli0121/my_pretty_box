@@ -1,0 +1,3 @@
+D:/dening_project/myMedia/libmyMediaApp/myMedia/.cxx/RelWithDebInfo/2j1h1t16/arm64-v8a/CMakeFiles/myMedia.dir
+D:/dening_project/myMedia/libmyMediaApp/myMedia/.cxx/RelWithDebInfo/2j1h1t16/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/dening_project/myMedia/libmyMediaApp/myMedia/.cxx/RelWithDebInfo/2j1h1t16/arm64-v8a/CMakeFiles/rebuild_cache.dir

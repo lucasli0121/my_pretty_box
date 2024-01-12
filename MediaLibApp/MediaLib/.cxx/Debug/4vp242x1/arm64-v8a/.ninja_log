@@ -1,0 +1,25 @@
+# ninja log v5
+2	1399	7265065493653536	CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o	1440e096be902391
+1418	2916	7265065504899590	../../../../build/intermediates/cxx/Debug/4vp242x1/obj/arm64-v8a/libMediaJni.so	e0f758dd61ebed49
+3	487	7265148774394883	CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o	1440e096be902391
+487	1159	7265148781157495	../../../../build/intermediates/cxx/Debug/4vp242x1/obj/arm64-v8a/libMediaJni.so	e0f758dd61ebed49
+5	1470	7265169757023198	CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o	1440e096be902391
+1472	1655	7265169768730059	../../../../build/intermediates/cxx/Debug/4vp242x1/obj/arm64-v8a/libMediaJni.so	e0f758dd61ebed49
+3	473	7265187795160949	CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o	1440e096be902391
+474	714	7265187797607003	../../../../build/intermediates/cxx/Debug/4vp242x1/obj/arm64-v8a/libMediaJni.so	e0f758dd61ebed49
+17	1490	7266050473145956	CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o	1440e096be902391
+1491	4292	7266050501516761	../../../../build/intermediates/cxx/Debug/4vp242x1/obj/arm64-v8a/libMediaJni.so	e0f758dd61ebed49
+18	499	7266396766508643	CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o	1440e096be902391
+500	1459	7266396776132246	../../../../build/intermediates/cxx/Debug/4vp242x1/obj/arm64-v8a/libMediaJni.so	e0f758dd61ebed49
+4	561	7266675283994031	CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o	1440e096be902391
+562	794	7266675286307620	../../../../build/intermediates/cxx/Debug/4vp242x1/obj/arm64-v8a/libMediaJni.so	e0f758dd61ebed49
+3	521	7266678457891717	CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o	1440e096be902391
+522	667	7266678459371782	../../../../build/intermediates/cxx/Debug/4vp242x1/obj/arm64-v8a/libMediaJni.so	e0f758dd61ebed49
+4	1006	7266682439901398	CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o	1440e096be902391
+1010	2535	7266682447214888	../../../../build/intermediates/cxx/Debug/4vp242x1/obj/arm64-v8a/libMediaJni.so	e0f758dd61ebed49
+5	488	7266685929965907	CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o	1440e096be902391
+489	634	7266685931461861	../../../../build/intermediates/cxx/Debug/4vp242x1/obj/arm64-v8a/libMediaJni.so	e0f758dd61ebed49
+15	2131	7267543589276468	CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o	1440e096be902391
+2132	3256	7267543600575599	../../../../build/intermediates/cxx/Debug/4vp242x1/obj/arm64-v8a/libMediaJni.so	e0f758dd61ebed49
+4	474	7267546399079144	CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o	1440e096be902391
+474	628	7267546400610570	../../../../build/intermediates/cxx/Debug/4vp242x1/obj/arm64-v8a/libMediaJni.so	e0f758dd61ebed49

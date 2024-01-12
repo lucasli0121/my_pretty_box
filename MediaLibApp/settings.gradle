@@ -1,0 +1,5 @@
+include ':app'
+include ':buildSec'
+include ':MediaLib'
+include ':RtmpLib'
+include ':mhui'

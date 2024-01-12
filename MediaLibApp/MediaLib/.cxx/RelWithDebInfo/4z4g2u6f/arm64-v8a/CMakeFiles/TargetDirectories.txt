@@ -1,0 +1,3 @@
+D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/MediaLib/.cxx/RelWithDebInfo/4z4g2u6f/arm64-v8a/CMakeFiles/MediaJni.dir
+D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/MediaLib/.cxx/RelWithDebInfo/4z4g2u6f/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/MediaLib/.cxx/RelWithDebInfo/4z4g2u6f/arm64-v8a/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,76 @@
+import com.build.config.*
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+}
+
+android {
+    namespace = "com.medialib"
+    compileSdk Versions.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion Versions.minSdkVersion
+        targetSdkVersion Versions.targetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+                arguments "-DANDROID_PLATFORM=android-28"
+            }
+        }
+        ndk{
+            abiFilters 'arm64-v8a' //'armeabi-v7a'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path="CMakeLists.txt"
+        }
+    }
+//    sourceSets {
+//        main {
+//            jniLibs.srcDirs = ['jniLibs']
+//        }
+//    }
+    buildTypes {
+        release {
+            //混淆
+            minifyEnabled false
+            //移除无用的resource文件
+            // shrinkResources true
+            //zipalign优化
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+        freeCompilerArgs = ['-Xjvm-default=all-compatibility']
+    }
+    buildFeatures{
+        viewBinding true
+    }
+    ndkVersion '21.1.6352462'
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    implementation(platform(Libs.Kotlin.kotlinBom))
+    implementation Libs.AndroidX.coreKtx
+    implementation Libs.Coroutines.android
+    implementation(Libs.AndroidX.annotation)
+    implementation Libs.AndroidX.appcompat
+    implementation Libs.Material.material
+    implementation(Libs.Material.material3)
+
+    testImplementation Libs.junit
+    androidTestImplementation Libs.AndroidX.Test.Ext.junit
+    androidTestImplementation Libs.AndroidX.Test.espressoCore
+}

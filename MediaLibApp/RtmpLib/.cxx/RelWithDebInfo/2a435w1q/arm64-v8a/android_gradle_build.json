@@ -1,0 +1,47 @@
+{
+  "buildFiles": [
+    "D:\\dening_project\\outSourcing_proj\\MYbox\\MediaLibApp\\RtmpLib\\src\\main\\cpp\\CMakeLists.txt",
+    "D:\\dening_project\\outSourcing_proj\\MYbox\\MediaLibApp\\RtmpLib\\src\\main\\cpp\\librtmp\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "E:\\android-sdk-windows\\cmake\\3.22.1\\bin\\ninja.exe",
+      "-C",
+      "D:\\dening_project\\outSourcing_proj\\MYbox\\MediaLibApp\\RtmpLib\\.cxx\\RelWithDebInfo\\2a435w1q\\arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "E:\\android-sdk-windows\\cmake\\3.22.1\\bin\\ninja.exe",
+    "-C",
+    "D:\\dening_project\\outSourcing_proj\\MYbox\\MediaLibApp\\RtmpLib\\.cxx\\RelWithDebInfo\\2a435w1q\\arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "librtmp::@c660c19e236c95bf39e0": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "librtmp",
+      "output": "D:\\dening_project\\outSourcing_proj\\MYbox\\MediaLibApp\\RtmpLib\\.cxx\\RelWithDebInfo\\2a435w1q\\arm64-v8a\\librtmp\\liblibrtmp.a"
+    },
+    "rtmplib::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "rtmplib",
+      "output": "D:\\dening_project\\outSourcing_proj\\MYbox\\MediaLibApp\\RtmpLib\\build\\intermediates\\cxx\\RelWithDebInfo\\2a435w1q\\obj\\arm64-v8a\\librtmplib.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "E:\\android-sdk-windows\\ndk\\21.1.6352462\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "E:\\android-sdk-windows\\ndk\\21.1.6352462\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

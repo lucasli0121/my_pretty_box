@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">mediaDemo</string>
+    <string name="network_error" translatable="false">网络出错</string>
+</resources>

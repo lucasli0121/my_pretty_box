@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2023-12-23 23:32:02
  * LastEditors: liguoqiang
- * LastEditTime: 2024-01-03 23:28:51
+ * LastEditTime: 2024-01-26 19:53:03
  * Description: 
 ********************************************************************************/
 #ifndef __RTMP_SRV_PROTO_H__
@@ -17,6 +17,7 @@ extern "C" {
 
 typedef void (*VideoCallbackFunc)(const char *data, int size, unsigned long timestamp, int key, void* user_data);
 typedef void (*AudioCallbackFunc)(const char *data, int size, unsigned long timestamp, void* user_data);
+typedef void (*BeginPublishFunc)(void* user_data);
 
 enum
 {
@@ -43,11 +44,17 @@ typedef struct
   THANDLE thread;
   RTMP * rtmp;
   RtmpMutex *mutex;
+  BeginPublishFunc beginPublishFunc;
   VideoCallbackFunc videoFunc;
   AudioCallbackFunc audioFunc;
   void *user_data;
   char* videoBuffer;
   int videoBufferSize;
+  int duration;
+  int width;
+  int height;
+  int framerate;
+  char encoder[64];
 } RTMP_STREAM;
 RTMP_STREAM* initRtmpStream(int chunkSize);
 int openRtmpStreaming(RTMP_STREAM*, int sockfd );

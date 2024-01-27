@@ -1,4 +1,4 @@
-# Install script for directory: D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/MediaLib
+# Install script for directory: D:/dening_project/outSourcing_proj/mybox/MediaLibApp/MediaLib
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/MediaLib/.cxx/Debug/4vp242x1/arm64-v8a/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/dening_project/outSourcing_proj/mybox/MediaLibApp/MediaLib/.cxx/Debug/4vp242x1/arm64-v8a/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

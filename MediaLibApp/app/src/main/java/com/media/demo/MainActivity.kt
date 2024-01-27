@@ -18,11 +18,13 @@ import com.media.demo.util.AssetFile
 import com.media.demo.util.PermissionsUtils
 import com.medialib.jni.MediaJni
 import com.meihu.beauty.utils.MhDataManager
+import com.meihu.beautylibrary.manager.MHBeautyManager
 import kotlinx.coroutines.async
 
 class MainActivity : AppCompatActivity() {
     private val REQUEST_CODE_PERMISSIONS = 10
     private val mediaJni = MediaJni()
+    private var mhManager: MHBeautyManager? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MainApplication.setCurrentActivity(this)
@@ -58,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         setContentView(R.layout.activity_main)
-        MhDataManager.getInstance().create(applicationContext)
+        mhManagerInit()
         var glSurface = findViewById<SurfaceView>(R.id.gl_surface)
         glSurface.holder.addCallback(object: SurfaceHolder.Callback {
             override fun surfaceCreated(holder: SurfaceHolder) {
@@ -82,7 +84,19 @@ class MainActivity : AppCompatActivity() {
 //        if(mediaJni.open(AssetFile.getMediaLogFile(this)) != -1) {
 //            mediaJni.testMediaCodec("mediacodec", AssetFile.getInputVideoFile(this), AssetFile.getOutputVideoFile(this))
 //        }
-
+    }
+    private fun mhManagerInit() {
+        MhDataManager.getInstance().create(applicationContext)
+        mhManager = MHBeautyManager(this)
+        mhManager?.setSkinWhiting(5)
+        mhManager?.setSkinSmooth(5)
+        mhManager?.setBrightness(80)
+        mhManager?.setBigEye(80)
+        mhManager?.setFaceLift(80)
+    }
+    private fun reInitMhManager() {
+        MhDataManager.getInstance().release()
+        mhManagerInit()
     }
     private fun startMediaServer() : Int {
         return mediaJni.openMediaServer(AssetFile.assetSdPath(this), object: MediaJni.IDecodeListener {
@@ -107,6 +121,10 @@ class MainActivity : AppCompatActivity() {
                 var newId = MhDataManager.getInstance().render(textureId1, w, h)
                 Log.d("mediaJni", "onRenderTextureId, id1=${textureId1}, newId=${newId}")
                 return newId
+            }
+
+            override fun onRenderInit() {
+                reInitMhManager()
             }
         })
     }

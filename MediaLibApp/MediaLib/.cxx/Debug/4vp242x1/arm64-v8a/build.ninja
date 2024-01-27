@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = D$:/dening_project/outSourcing_proj/MYbox/MediaLibApp/MediaLib/.cxx/Debug/4vp242x1/arm64-v8a/
+cmake_ninja_workdir = D$:/dening_project/outSourcing_proj/mybox/MediaLibApp/MediaLib/.cxx/Debug/4vp242x1/arm64-v8a/
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target MediaJni
 
@@ -49,11 +49,11 @@ cmake_ninja_workdir = D$:/dening_project/outSourcing_proj/MYbox/MediaLibApp/Medi
 
 build cmake_object_order_depends_target_MediaJni: phony || CMakeFiles/MediaJni.dir
 
-build CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o: CXX_COMPILER__MediaJni_Debug D$:/dening_project/outSourcing_proj/MYbox/MediaLibApp/MediaLib/src/main/cpp/com_medialib_jni_MediaJni.cpp || cmake_object_order_depends_target_MediaJni
+build CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o: CXX_COMPILER__MediaJni_Debug D$:/dening_project/outSourcing_proj/mybox/MediaLibApp/MediaLib/src/main/cpp/com_medialib_jni_MediaJni.cpp || cmake_object_order_depends_target_MediaJni
   DEFINES = -DMediaJni_EXPORTS
   DEP_FILE = CMakeFiles\MediaJni.dir\src\main\cpp\com_medialib_jni_MediaJni.cpp.o.d
-  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -LD:/dening_project/outSourcing_proj/MYbox/MediaLibApp/MediaLib/src/main/jniLibs/arm64-v8a -O0 -fno-limit-debug-info  -fPIC
-  INCLUDES = -ID:/dening_project/outSourcing_proj/MYbox/MediaLibApp/MediaLib/src/main/cpp/include
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -LD:/dening_project/outSourcing_proj/mybox/MediaLibApp/MediaLib/src/main/jniLibs/arm64-v8a -O0 -fno-limit-debug-info  -fPIC
+  INCLUDES = -ID:/dening_project/outSourcing_proj/mybox/MediaLibApp/MediaLib/src/main/cpp/include
   OBJECT_DIR = CMakeFiles\MediaJni.dir
   OBJECT_FILE_DIR = CMakeFiles\MediaJni.dir\src\main\cpp
 
@@ -66,7 +66,7 @@ build CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o: CXX_
 # Link the shared library ..\..\..\..\build\intermediates\cxx\Debug\4vp242x1\obj\arm64-v8a\libMediaJni.so
 
 build ../../../../build/intermediates/cxx/Debug/4vp242x1/obj/arm64-v8a/libMediaJni.so: CXX_SHARED_LIBRARY_LINKER__MediaJni_Debug CMakeFiles/MediaJni.dir/src/main/cpp/com_medialib_jni_MediaJni.cpp.o | E$:/android-sdk-windows/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/28/libEGL.so E$:/android-sdk-windows/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/28/libGLESv3.so E$:/android-sdk-windows/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/28/liblog.so
-  LANGUAGE_COMPILE_FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -LD:/dening_project/outSourcing_proj/MYbox/MediaLibApp/MediaLib/src/main/jniLibs/arm64-v8a -O0 -fno-limit-debug-info
+  LANGUAGE_COMPILE_FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -LD:/dening_project/outSourcing_proj/mybox/MediaLibApp/MediaLib/src/main/jniLibs/arm64-v8a -O0 -fno-limit-debug-info
   LINK_FLAGS = -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libgcc_real.a -Wl,--exclude-libs,libatomic.a -static-libstdc++ -Wl,--build-id -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments
   LINK_LIBRARIES = -lmycodec  -lrtmpsvr  -lx264  -lyuv  E:/android-sdk-windows/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/28/libEGL.so  E:/android-sdk-windows/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/28/libGLESv3.so  E:/android-sdk-windows/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/28/liblog.so  -latomic -lm
   OBJECT_DIR = CMakeFiles\MediaJni.dir
@@ -82,7 +82,7 @@ build ../../../../build/intermediates/cxx/Debug/4vp242x1/obj/arm64-v8a/libMediaJ
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D D:\dening_project\outSourcing_proj\MYbox\MediaLibApp\MediaLib\.cxx\Debug\4vp242x1\arm64-v8a && E:\android-sdk-windows\cmake\3.22.1\bin\cmake.exe -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D D:\dening_project\outSourcing_proj\mybox\MediaLibApp\MediaLib\.cxx\Debug\4vp242x1\arm64-v8a && E:\android-sdk-windows\cmake\3.22.1\bin\cmake.exe -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -93,7 +93,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D D:\dening_project\outSourcing_proj\MYbox\MediaLibApp\MediaLib\.cxx\Debug\4vp242x1\arm64-v8a && E:\android-sdk-windows\cmake\3.22.1\bin\cmake.exe --regenerate-during-build -SD:\dening_project\outSourcing_proj\MYbox\MediaLibApp\MediaLib -BD:\dening_project\outSourcing_proj\MYbox\MediaLibApp\MediaLib\.cxx\Debug\4vp242x1\arm64-v8a"
+  COMMAND = cmd.exe /C "cd /D D:\dening_project\outSourcing_proj\mybox\MediaLibApp\MediaLib\.cxx\Debug\4vp242x1\arm64-v8a && E:\android-sdk-windows\cmake\3.22.1\bin\cmake.exe --regenerate-during-build -SD:\dening_project\outSourcing_proj\mybox\MediaLibApp\MediaLib -BD:\dening_project\outSourcing_proj\mybox\MediaLibApp\MediaLib\.cxx\Debug\4vp242x1\arm64-v8a"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -113,7 +113,7 @@ build libMediaJni.so: phony ../../../../build/intermediates/cxx/Debug/4vp242x1/o
 # =============================================================================
 
 #############################################
-# Folder: D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/MediaLib/.cxx/Debug/4vp242x1/arm64-v8a
+# Folder: D:/dening_project/outSourcing_proj/mybox/MediaLibApp/MediaLib/.cxx/Debug/4vp242x1/arm64-v8a
 
 build all: phony ../../../../build/intermediates/cxx/Debug/4vp242x1/obj/arm64-v8a/libMediaJni.so
 

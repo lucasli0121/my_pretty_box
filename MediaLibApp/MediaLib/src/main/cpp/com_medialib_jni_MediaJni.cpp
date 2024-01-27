@@ -3,6 +3,7 @@
 #include <android/log.h>
 #include "include/mycodec/codec.h"
 #include "include/rtmpsrv.h"
+#include "include/rtmp_client.h"
 #include "com_medialib_jni_MediaJni.h"
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
@@ -16,9 +17,10 @@ static jobject _jcallBack = NULL;
 static long _decodec = 0;
 static long _encodec = 0;
 static RTMP_SERVER * _rtmpServer = NULL;
+static RTMP* _rtmp = 0;
 static bool _needDetach = false;
 static char _modulePath[255];
-static FILE * _texFile = NULL;
+//static FILE * _texFile = NULL;
 static GLuint _texId[1];
 static GLuint _fboId[1];
 static EGLContext _eglCtx = NULL;
@@ -182,12 +184,14 @@ static void releaseTextureIds()
     if(_texId[0] > 0) {
         glBindTexture(GL_TEXTURE_2D, GL_NONE);
         glDeleteTextures(1, _texId);
+        _texId[0] = 0;
     }
     if(_fboId[0] > 0) {
         glDeleteFramebuffers(1, _fboId);
+        _fboId[0] = 0;
     }
 }
-static void toTexture(unsigned char* data, int len, int w, int h)
+static void toTexture(unsigned char* data, int len, int w, int h, int keyframe)
 {
     if(initEGLContext() == -1) {
         return;
@@ -236,32 +240,78 @@ static void toTexture(unsigned char* data, int len, int w, int h)
         glReadBuffer(GL_COLOR_ATTACHMENT0);
         GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
         if (status != GL_FRAMEBUFFER_COMPLETE) {
-            Log("glCheckFramebufferStatus is not complete!");
+            Log("glCheckFramebufferStatus is not complete!err=%d", glGetError());
+        } else {
+            glViewport(0, 0, w, h);
+            GLubyte *pixels = (GLubyte *) malloc(len);
+            glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+            //        vbyte8_ptr out = NULL;
+            //        vint32_t size = rgba_to_yuv420p(_decodec, (vbyte8_ptr)pixels, len, w, h, w, h, &out);
+            encoder_from_RGBA(_encodec, (vbyte8_ptr) pixels, len, w, h, keyframe);
+            //        ret = fwrite(out, size, 1, _texFile);
+            //        if(ret != 1) {
+            //            Log("write file failed");
+            //        }
+            free(pixels);
         }
-        glViewport(0, 0, w, h);
-        GLubyte * pixels = (GLubyte*)malloc(len);
-        glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
         glBindTexture(GL_TEXTURE_2D, 0);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        vbyte8_ptr out = NULL;
-        vint32_t size = rgba_to_yuv420p(_decodec, (vbyte8_ptr)pixels, len, w, h, w, h, &out);
-        ret = fwrite(out, size, 1, _texFile);
-        if(ret != 1) {
-            Log("write file failed");
-        }
-        free(pixels);
     }
     exit:
     if(_needDetach) {
         _javaVM->DetachCurrentThread();
     }
 }
+static MetaData _dataFrame = {0};
+static int hasDataFrame = 0;
+static void encodeFunc(vbyte8_ptr data, vint32_t len, int64 pts, int64 dts, void* user_data)
+{
+    if(hasDataFrame == 0) {
+        getRtmpMetaData(&_dataFrame);
+        hasDataFrame = 1;
+        setMetaData(_rtmp, _dataFrame.width, _dataFrame.height, _dataFrame.fps, _dataFrame.duration, _dataFrame.encoder);
+    }
+    sendX264VideoData(_rtmp, reinterpret_cast<const char *>(data), len, 0);
+}
 /*
  * 解码后回调的函数，RGBA格式
  */
 static void decodeFunc(unsigned char* data, int len, int width, int height, int keyframe, void* user_data)
 {
-    toTexture(data, len, width, height);
+    toTexture(data, len, width, height, keyframe);
+}
+static void rtmpBeginPublish(void* user_data)
+{
+    JNIEnv *env = 0;
+    int envStat = 0;
+    int ret = 0;
+    bool needDetach = false;
+    envStat = _javaVM->GetEnv((void**)&env, JNI_VERSION_1_6);
+    if (envStat == JNI_EDETACHED) {
+        if(_javaVM->AttachCurrentThread(&env, NULL) != 0) {
+            goto exit;
+        }
+        needDetach = true;
+    }
+    if (_jcallBack != NULL) {
+        jclass jcls = env->GetObjectClass(_jcallBack);
+        if (jcls == NULL) {
+            Log("decodeYuvFunc, getobjectclass failed");
+            goto exit;
+        }
+        jmethodID method = env->GetMethodID(jcls, "onRenderInit", "()V");
+        if (method == NULL) {
+            Log("unable to find method onDecodeCallback");
+            goto exit;
+        }
+        env->CallVoidMethod(_jcallBack, method);
+    }
+    exit:
+    if(needDetach) {
+        _javaVM->DetachCurrentThread();
+    }
+    uninitEGLContext();
+    releaseTextureIds();
 }
 /*
  * rtmp server 接收到视频后的回调，格式H264
@@ -317,6 +367,7 @@ extern "C" JNIEXPORT jint JNICALL Java_com_medialib_jni_MediaJni_openMediaServer
     if (_encodec == 0) {
         goto error;
     }
+    set_video_encode_callback(_encodec, encodeFunc, 0);
     _rtmpServer = openRtmpServer(getDefaultRtmpRequest());
     if(_rtmpServer == NULL) {
         goto error;
@@ -327,10 +378,16 @@ extern "C" JNIEXPORT jint JNICALL Java_com_medialib_jni_MediaJni_openMediaServer
 //    loadTextureIds();
     setRtmpVideoCallback(rtmpVideoReceiv, NULL);
     setRtmpAudioCallback(rtmpAudioReceiv, NULL);
+    setRtmpBeginPublishCallback(rtmpBeginPublish, NULL);
+    _rtmp = startRtmpClient("rtmp://120.79.139.90:1935/live/test");  // rtmp://192.168.1.102:1935/live/test
+    if(_rtmp == NULL)
+    {
+        goto error;
+    }
     _jcallBack = (*env).NewGlobalRef(callBack);
     char name[255];
     sprintf(name, "%sdst.yuv", _modulePath);
-    _texFile = fopen(name, "wb");
+//    _texFile = fopen(name, "wb");
     return 0;
 error:
     if(_decodec != 0) {
@@ -345,6 +402,10 @@ error:
         closeRtmpServer(_rtmpServer);
         _rtmpServer = NULL;
     }
+    if(_rtmp != NULL) {
+        stopRtmpClient(_rtmp);
+        _rtmp = NULL;
+    }
     codec_unini();
     return -1;
 }
@@ -356,10 +417,10 @@ error:
  */
 extern "C" JNIEXPORT void JNICALL Java_com_medialib_jni_MediaJni_closeMediaServer(JNIEnv *, jobject)
 {
-    if(_texFile != NULL) {
-        fclose(_texFile);
-        _texFile = NULL;
-    }
+//    if(_texFile != NULL) {
+//        fclose(_texFile);
+//        _texFile = NULL;
+//    }
     releaseTextureIds();
     uninitEGLContext();
     if(_decodec != 0) {
@@ -369,6 +430,10 @@ extern "C" JNIEXPORT void JNICALL Java_com_medialib_jni_MediaJni_closeMediaServe
     if(_rtmpServer != NULL) {
         closeRtmpServer(_rtmpServer);
         _rtmpServer = NULL;
+    }
+    if(_rtmp != NULL) {
+        stopRtmpClient(_rtmp);
+        _rtmp = NULL;
     }
     codec_unini();
 }

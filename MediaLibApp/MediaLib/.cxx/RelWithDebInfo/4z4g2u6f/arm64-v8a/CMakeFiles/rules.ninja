@@ -42,7 +42,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = E:\android-sdk-windows\cmake\3.22.1\bin\cmake.exe --regenerate-during-build -SD:\dening_project\outSourcing_proj\MYbox\MediaLibApp\MediaLib -BD:\dening_project\outSourcing_proj\MYbox\MediaLibApp\MediaLib\.cxx\RelWithDebInfo\4z4g2u6f\arm64-v8a
+  command = E:\android-sdk-windows\cmake\3.22.1\bin\cmake.exe --regenerate-during-build -SD:\dening_project\outSourcing_proj\mybox\MediaLibApp\MediaLib -BD:\dening_project\outSourcing_proj\mybox\MediaLibApp\MediaLib\.cxx\RelWithDebInfo\4z4g2u6f\arm64-v8a
   description = Re-running CMake...
   generator = 1
 

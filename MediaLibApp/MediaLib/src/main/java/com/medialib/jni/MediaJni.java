@@ -23,6 +23,7 @@ public class MediaJni {
     public interface IDecodeListener {
         void onDecodeCallback(byte[] data, int len, int w, int h, int keyFrame);
         int onRenderTextureId(int textureId1, int textureId2, int textureId3, byte[]data, int w, int h);
+        void onRenderInit();
     }
 
     public native int openMediaServer(String logfile, IDecodeListener listener);

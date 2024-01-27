@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2023-12-22 20:09:51
  * LastEditors: liguoqiang
- * LastEditTime: 2023-12-31 23:01:40
+ * LastEditTime: 2024-01-26 19:56:28
  * Description: 
 ********************************************************************************/
 #ifndef __RTMP_SRV_H__
@@ -38,11 +38,22 @@ typedef struct
   THANDLE thread;
 } RTMP_SERVER;
 
+typedef struct
+{
+  char encoder[64];
+  int duration;
+  int width;
+  int height;
+  int fps;
+} MetaData;
+
 RTMP_SERVER* openRtmpServer(RTMP_REQUEST *rtmpRequest);
 RTMP_REQUEST *getDefaultRtmpRequest();
 void closeRtmpServer(RTMP_SERVER *rtmpServer);
 void setRtmpVideoCallback(VideoCallbackFunc videoFunc, void *user_data);
 void setRtmpAudioCallback(AudioCallbackFunc audioFunc, void *user_data);
+void setRtmpBeginPublishCallback(BeginPublishFunc beginPublishFunc, void *user_data);
+void getRtmpMetaData(MetaData *dataFrame);
 
 #ifdef __cplusplus
 }

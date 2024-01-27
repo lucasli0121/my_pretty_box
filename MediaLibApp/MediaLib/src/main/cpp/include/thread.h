@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2023-12-22 15:13:59
  * LastEditors: liguoqiang
- * LastEditTime: 2024-01-01 08:49:53
+ * LastEditTime: 2024-01-12 20:14:16
  * Description: 
 ********************************************************************************/
 /*  Thread compatibility glue
@@ -40,7 +40,7 @@ typedef CRITICAL_SECTION   thread_mutex_t;   //win32 mutex
 #include <pthread.h>
 #include <unistd.h>
 #define TFTYPE	void *
-#define TFRET()	return 0
+#define TFRET()	0
 #define THANDLE pthread_t
 typedef pthread_mutex_t    thread_mutex_t;
 #endif

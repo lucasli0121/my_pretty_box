@@ -288,6 +288,8 @@ extern "C"
 
   int RTMP_ReadPacket(RTMP *r, RTMPPacket *packet);
   int RTMP_SendPacket(RTMP *r, RTMPPacket *packet, int queue);
+  char* RTMP_PacketToBuf(RTMP *r, RTMPPacket *packet);
+  int RTMP_Packet_GetTotalSize(RTMPPacket *packet);
   int RTMP_SendChunk(RTMP *r, RTMPChunk *chunk);
   int RTMP_IsConnected(RTMP *r);
   int RTMP_Socket(RTMP *r);

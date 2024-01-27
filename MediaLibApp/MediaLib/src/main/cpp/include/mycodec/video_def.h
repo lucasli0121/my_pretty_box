@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2021-06-15 17:16:24
  * LastEditors: liguoqiang
- * LastEditTime: 2024-01-10 16:52:06
+ * LastEditTime: 2024-01-15 11:26:51
  * Description: 
 ********************************************************************************/
 #ifndef __VIDEO_DEFINE_H
@@ -42,6 +42,7 @@ typedef struct VideoParam
 	int _height;
 	int _bitrate;
 	int _frame_rate;
+	int _max_b_frame;
 	void* _user_data;
 	DecodeCallbackFunc _decode_callback_func;
 	EncodeCallbackFunc _encode_callback_func;

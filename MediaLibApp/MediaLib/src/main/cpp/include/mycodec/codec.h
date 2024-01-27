@@ -28,6 +28,8 @@ int64 create_video_codec(VideoFmt , CodecType,  vint32_t, vint32_t, vint32_t, vi
 void release_video_codec(int64);
 void set_jni_env(void* env);
 void set_video_size(int64 codec, vint32_t w, vint32_t h);
+VideoParam* get_video_param(int64 codec);
+void set_video_param(int64 codec, const VideoParam* param);
 
 vint32_t encoder_from_RGBA(int64 codec, vbyte8_ptr srcdata,	vint32_t srclen, vint32_t width, vint32_t height, vint32_t keyframe);
 

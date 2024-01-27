@@ -1,4 +1,4 @@
-# Install script for directory: D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/RtmpLib/src/main/cpp
+# Install script for directory: D:/dening_project/outSourcing_proj/mybox/MediaLibApp/RtmpLib/src/main/cpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/RtmpLib/.cxx/Debug/5i1d4sh4/arm64-v8a/librtmp/cmake_install.cmake")
+  include("D:/dening_project/outSourcing_proj/mybox/MediaLibApp/RtmpLib/.cxx/Debug/5i1d4sh4/arm64-v8a/librtmp/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -55,5 +55,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/RtmpLib/.cxx/Debug/5i1d4sh4/arm64-v8a/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/dening_project/outSourcing_proj/mybox/MediaLibApp/RtmpLib/.cxx/Debug/5i1d4sh4/arm64-v8a/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

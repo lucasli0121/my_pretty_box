@@ -1,1 +1,1 @@
-D:\dening_project\outSourcing_proj\MYbox\MediaLibApp\MediaLib\CMakeLists.txt
+D:\dening_project\outSourcing_proj\mybox\MediaLibApp\MediaLib\CMakeLists.txt

@@ -1,33 +1,33 @@
 {
   "buildFiles": [
-    "D:\\dening_project\\outSourcing_proj\\MYbox\\MediaLibApp\\RtmpLib\\src\\main\\cpp\\CMakeLists.txt",
-    "D:\\dening_project\\outSourcing_proj\\MYbox\\MediaLibApp\\RtmpLib\\src\\main\\cpp\\librtmp\\CMakeLists.txt"
+    "D:\\dening_project\\outSourcing_proj\\mybox\\MediaLibApp\\RtmpLib\\src\\main\\cpp\\CMakeLists.txt",
+    "D:\\dening_project\\outSourcing_proj\\mybox\\MediaLibApp\\RtmpLib\\src\\main\\cpp\\librtmp\\CMakeLists.txt"
   ],
   "cleanCommandsComponents": [
     [
       "E:\\android-sdk-windows\\cmake\\3.22.1\\bin\\ninja.exe",
       "-C",
-      "D:\\dening_project\\outSourcing_proj\\MYbox\\MediaLibApp\\RtmpLib\\.cxx\\Debug\\5i1d4sh4\\arm64-v8a",
+      "D:\\dening_project\\outSourcing_proj\\mybox\\MediaLibApp\\RtmpLib\\.cxx\\Debug\\5i1d4sh4\\arm64-v8a",
       "clean"
     ]
   ],
   "buildTargetsCommandComponents": [
     "E:\\android-sdk-windows\\cmake\\3.22.1\\bin\\ninja.exe",
     "-C",
-    "D:\\dening_project\\outSourcing_proj\\MYbox\\MediaLibApp\\RtmpLib\\.cxx\\Debug\\5i1d4sh4\\arm64-v8a",
+    "D:\\dening_project\\outSourcing_proj\\mybox\\MediaLibApp\\RtmpLib\\.cxx\\Debug\\5i1d4sh4\\arm64-v8a",
     "{LIST_OF_TARGETS_TO_BUILD}"
   ],
   "libraries": {
     "rtmplib::@6890427a1f51a3e7e1df": {
       "artifactName": "rtmplib",
       "abi": "arm64-v8a",
-      "output": "D:\\dening_project\\outSourcing_proj\\MYbox\\MediaLibApp\\RtmpLib\\build\\intermediates\\cxx\\Debug\\5i1d4sh4\\obj\\arm64-v8a\\librtmplib.so",
+      "output": "D:\\dening_project\\outSourcing_proj\\mybox\\MediaLibApp\\RtmpLib\\build\\intermediates\\cxx\\Debug\\5i1d4sh4\\obj\\arm64-v8a\\librtmplib.so",
       "runtimeFiles": []
     },
     "librtmp::@c660c19e236c95bf39e0": {
       "artifactName": "librtmp",
       "abi": "arm64-v8a",
-      "output": "D:\\dening_project\\outSourcing_proj\\MYbox\\MediaLibApp\\RtmpLib\\.cxx\\Debug\\5i1d4sh4\\arm64-v8a\\librtmp\\liblibrtmp.a",
+      "output": "D:\\dening_project\\outSourcing_proj\\mybox\\MediaLibApp\\RtmpLib\\.cxx\\Debug\\5i1d4sh4\\arm64-v8a\\librtmp\\liblibrtmp.a",
       "runtimeFiles": []
     }
   }

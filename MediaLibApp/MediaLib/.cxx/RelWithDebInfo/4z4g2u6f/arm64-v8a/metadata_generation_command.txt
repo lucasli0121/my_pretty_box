@@ -1,4 +1,4 @@
-                        -HD:\dening_project\outSourcing_proj\MYbox\MediaLibApp\MediaLib
+                        -HD:\dening_project\outSourcing_proj\mybox\MediaLibApp\MediaLib
 -DCMAKE_SYSTEM_NAME=Android
 -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 -DCMAKE_SYSTEM_VERSION=26
@@ -8,10 +8,10 @@
 -DCMAKE_ANDROID_NDK=E:\android-sdk-windows\ndk\21.1.6352462
 -DCMAKE_TOOLCHAIN_FILE=E:\android-sdk-windows\ndk\21.1.6352462\build\cmake\android.toolchain.cmake
 -DCMAKE_MAKE_PROGRAM=E:\android-sdk-windows\cmake\3.22.1\bin\ninja.exe
--DCMAKE_LIBRARY_OUTPUT_DIRECTORY=D:\dening_project\outSourcing_proj\MYbox\MediaLibApp\MediaLib\build\intermediates\cxx\RelWithDebInfo\4z4g2u6f\obj\arm64-v8a
--DCMAKE_RUNTIME_OUTPUT_DIRECTORY=D:\dening_project\outSourcing_proj\MYbox\MediaLibApp\MediaLib\build\intermediates\cxx\RelWithDebInfo\4z4g2u6f\obj\arm64-v8a
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=D:\dening_project\outSourcing_proj\mybox\MediaLibApp\MediaLib\build\intermediates\cxx\RelWithDebInfo\4z4g2u6f\obj\arm64-v8a
+-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=D:\dening_project\outSourcing_proj\mybox\MediaLibApp\MediaLib\build\intermediates\cxx\RelWithDebInfo\4z4g2u6f\obj\arm64-v8a
 -DCMAKE_BUILD_TYPE=RelWithDebInfo
--BD:\dening_project\outSourcing_proj\MYbox\MediaLibApp\MediaLib\.cxx\RelWithDebInfo\4z4g2u6f\arm64-v8a
+-BD:\dening_project\outSourcing_proj\mybox\MediaLibApp\MediaLib\.cxx\RelWithDebInfo\4z4g2u6f\arm64-v8a
 -GNinja
 -DANDROID_PLATFORM=android-28
                         Build command args: []

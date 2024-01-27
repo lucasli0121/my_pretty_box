@@ -1,4 +1,4 @@
-# Install script for directory: D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/RtmpLib/src/main/cpp/librtmp
+# Install script for directory: D:/dening_project/outSourcing_proj/mybox/MediaLibApp/RtmpLib/src/main/cpp/librtmp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

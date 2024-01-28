@@ -1,6 +1,0 @@
-D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/RtmpLib/.cxx/RelWithDebInfo/2a435w1q/arm64-v8a/CMakeFiles/rtmplib.dir
-D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/RtmpLib/.cxx/RelWithDebInfo/2a435w1q/arm64-v8a/CMakeFiles/edit_cache.dir
-D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/RtmpLib/.cxx/RelWithDebInfo/2a435w1q/arm64-v8a/CMakeFiles/rebuild_cache.dir
-D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/RtmpLib/.cxx/RelWithDebInfo/2a435w1q/arm64-v8a/librtmp/CMakeFiles/librtmp.dir
-D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/RtmpLib/.cxx/RelWithDebInfo/2a435w1q/arm64-v8a/librtmp/CMakeFiles/edit_cache.dir
-D:/dening_project/outSourcing_proj/MYbox/MediaLibApp/RtmpLib/.cxx/RelWithDebInfo/2a435w1q/arm64-v8a/librtmp/CMakeFiles/rebuild_cache.dir

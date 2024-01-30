@@ -54,6 +54,14 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
+        <receiver
+            android:name=".receiver.BootBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

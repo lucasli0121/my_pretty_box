@@ -88,21 +88,30 @@ class MainActivity : AppCompatActivity() {
     private fun mhManagerInit() {
         MhDataManager.getInstance().create(applicationContext)
         mhManager = MHBeautyManager(this)
-        mhManager?.setSkinWhiting(5)
+        mhManager?.setSkinWhiting(8)
         mhManager?.setSkinSmooth(9)
-        mhManager?.setBrightness(80)
-        mhManager?.setBigEye(80)
-        mhManager?.setFaceLift(80)
-        mhManager?.setMouseLift(80)
-        mhManager?.setNoseLift(80)
-        mhManager?.setChinLift(80)
-        mhManager?.setForeheadLift(80)
-        mhManager?.setEyeBrow(80)
-        mhManager?.setEyeCorner(80)
-        mhManager?.setEyeLength(80)
-        mhManager?.setEyeAlat(80)
-        mhManager?.setFaceShave(80)
-        mhManager?.setLengthenNoseLift(80)
+        mhManager?.setBrightness(50)
+        mhManager?.setBigEye(100)
+        mhManager?.setFaceLift(100)
+        mhManager?.setMouseLift(100)
+        mhManager?.setNoseLift(100)
+        mhManager?.setChinLift(100)
+        mhManager?.setForeheadLift(100)
+        mhManager?.setEyeBrow(100)
+        mhManager?.setEyeCorner(100)
+        mhManager?.setEyeLength(100)
+        mhManager?.setEyeAlat(100)
+        mhManager?.setFaceShave(100)
+        mhManager?.setLengthenNoseLift(100)
+        var userfaces = mhManager?.useFaces
+        if (userfaces != null && userfaces.isNotEmpty()) {
+            userfaces[0] = 1
+            if(userfaces.size > 1) {
+                userfaces[1] = 1
+            }
+            mhManager?.setUseFace(true)
+            mhManager?.useFaces = userfaces
+        }
     }
     private fun reInitMhManager() {
         MhDataManager.getInstance().release()

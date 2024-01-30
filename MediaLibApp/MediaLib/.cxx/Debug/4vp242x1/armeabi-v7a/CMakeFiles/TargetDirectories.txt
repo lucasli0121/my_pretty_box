@@ -1,3 +1,0 @@
-D:/dening_project/myMedia/MediaLibApp/MediaLib/.cxx/Debug/4vp242x1/armeabi-v7a/CMakeFiles/MediaJni.dir
-D:/dening_project/myMedia/MediaLibApp/MediaLib/.cxx/Debug/4vp242x1/armeabi-v7a/CMakeFiles/edit_cache.dir
-D:/dening_project/myMedia/MediaLibApp/MediaLib/.cxx/Debug/4vp242x1/armeabi-v7a/CMakeFiles/rebuild_cache.dir

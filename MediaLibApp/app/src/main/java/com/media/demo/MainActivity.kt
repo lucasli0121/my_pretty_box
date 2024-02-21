@@ -65,6 +65,8 @@ class MainActivity : AppCompatActivity() {
         glSurface.holder.addCallback(object: SurfaceHolder.Callback {
             override fun surfaceCreated(holder: SurfaceHolder) {
                 startMediaServer()
+                // Example of a call to a native method.
+//                mediaJni.testMediaCodec(AssetFile.getInputVideoFile(this@MainActivity), AssetFile.getOutputVideoFile(this@MainActivity))
             }
 
             override fun surfaceChanged(
@@ -80,10 +82,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        // Example of a call to a native method.
-//        if(mediaJni.open(AssetFile.getMediaLogFile(this)) != -1) {
-//            mediaJni.testMediaCodec("mediacodec", AssetFile.getInputVideoFile(this), AssetFile.getOutputVideoFile(this))
-//        }
+
     }
     private fun mhManagerInit() {
         MhDataManager.getInstance().create(applicationContext)

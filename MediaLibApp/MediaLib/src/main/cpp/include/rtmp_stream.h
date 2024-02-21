@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2023-12-23 23:32:02
  * LastEditors: liguoqiang
- * LastEditTime: 2024-01-26 19:53:03
+ * LastEditTime: 2024-02-14 10:29:53
  * Description: 
 ********************************************************************************/
 #ifndef __RTMP_SRV_PROTO_H__
@@ -15,8 +15,8 @@
 extern "C" {
 #endif
 
-typedef void (*VideoCallbackFunc)(const char *data, int size, unsigned long timestamp, int key, void* user_data);
-typedef void (*AudioCallbackFunc)(const char *data, int size, unsigned long timestamp, void* user_data);
+typedef void (*VideoCallbackFunc)(const char *data, int size, unsigned long timestamp, uint8_t absTimestamp, int key, void* user_data);
+typedef void (*AudioCallbackFunc)(const char *data, int size, unsigned long timestamp, uint8_t absTimestamp, void* user_data);
 typedef void (*BeginPublishFunc)(void* user_data);
 
 enum
@@ -44,6 +44,7 @@ typedef struct
   THANDLE thread;
   RTMP * rtmp;
   RtmpMutex *mutex;
+  int needRawVideo;
   BeginPublishFunc beginPublishFunc;
   VideoCallbackFunc videoFunc;
   AudioCallbackFunc audioFunc;
@@ -55,8 +56,10 @@ typedef struct
   int height;
   int framerate;
   char encoder[64];
+  char* dataFrameBuf;
+  int dataFrameSize;
 } RTMP_STREAM;
-RTMP_STREAM* initRtmpStream(int chunkSize);
+RTMP_STREAM* initRtmpStream(int chunkSize, int needRawVideo);
 int openRtmpStreaming(RTMP_STREAM*, int sockfd );
 void closeRtmpStreaming(RTMP_STREAM *rtmpStream);
 

@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2023-12-22 20:09:51
  * LastEditors: liguoqiang
- * LastEditTime: 2024-01-26 19:56:28
+ * LastEditTime: 2024-02-14 10:33:01
  * Description: 
 ********************************************************************************/
 #ifndef __RTMP_SRV_H__
@@ -36,6 +36,7 @@ typedef struct
   char *host;
   int port;
   THANDLE thread;
+  int needRawVideo;
 } RTMP_SERVER;
 
 typedef struct
@@ -53,7 +54,8 @@ void closeRtmpServer(RTMP_SERVER *rtmpServer);
 void setRtmpVideoCallback(VideoCallbackFunc videoFunc, void *user_data);
 void setRtmpAudioCallback(AudioCallbackFunc audioFunc, void *user_data);
 void setRtmpBeginPublishCallback(BeginPublishFunc beginPublishFunc, void *user_data);
-void getRtmpMetaData(MetaData *dataFrame);
+int getRtmpMetaData(char** metaData);
+void getRtmpDataFrame(MetaData *metaData);
 
 #ifdef __cplusplus
 }

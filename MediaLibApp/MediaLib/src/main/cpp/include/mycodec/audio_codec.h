@@ -31,11 +31,8 @@ public:
 	void unini();
 	void set_audio_param(const AudioParam& param);
 	AudioParam* get_audio_param();
-	int encode_audio(vbyte8_ptr src, int srclen, vbyte8_ptr* dest, int *destlen);
-	int decode_audio(vbyte8_ptr src,
-			int srclen,
-			void (*decode_callback)(vbyte8_ptr dest, vint32_t destlen, void*),
-			void*); 
+	int encode_audio(vbyte8_ptr src, int srclen);
+	int decode_audio(vbyte8_ptr src, int srclen); 
 private:
 	int alloc_avcodec();
 	int open_codec();
@@ -44,10 +41,9 @@ private:
 	int create_decoder();
 private:
 	AudioParam _audio_param;
-	StreamBuffer _in_buffer;
-	StreamBuffer _encode_buffer;
 	struct AVCodecContext* _av_codec_ctx;
-	struct AVCodec * _av_codec;
+	AVCodecParserContext *_av_parser;
+	const AVCodec * _av_codec;
 	bool _has_open;
 	uint16_t *  _sample_buf;
 	uint32_t _sample_size;

@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2021-06-15 17:16:24
  * LastEditors: liguoqiang
- * LastEditTime: 2024-01-15 11:26:51
+ * LastEditTime: 2024-02-08 00:19:29
  * Description: 
 ********************************************************************************/
 #ifndef __VIDEO_DEFINE_H
@@ -22,7 +22,8 @@ typedef enum VideoFmt
 { 
 	VIDEO_NULL_CODEC = 0,
 	VIDEO_MPEG4_CODEC,
-	VIDEO_H264_CODEC
+	VIDEO_H264_CODEC,
+	VIDEO_MEDIA_CODEC,
 }VideoFmt;
 
 typedef enum CodecType
@@ -32,7 +33,7 @@ typedef enum CodecType
 }CodecType;
 
 typedef void (*DecodeCallbackFunc)(vbyte8_ptr dest, vint32_t destlen, vint32_t w, vint32_t h, vint32_t keyframe, void*);
-typedef void (*EncodeCallbackFunc)(vbyte8_ptr dest, vint32_t destlen, int64 pts, int64 dts, void*);
+typedef void (*EncodeCallbackFunc)(vbyte8_ptr dest, vint32_t destlen, vint64_t pts, vint64_t dts, void*);
 
 typedef struct VideoParam
 {

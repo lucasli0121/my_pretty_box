@@ -23,6 +23,15 @@ JNIEXPORT jint JNICALL Java_com_medialib_jni_MediaJni_openMediaServer
 JNIEXPORT void JNICALL Java_com_medialib_jni_MediaJni_closeMediaServer
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_medialib_jni_MediaJni
+ * Method:    testMediaCodec
+ * Signature: (Ljava/lang/String;Ljava/lang/String;)V
+ */
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_medialib_jni_MediaJni_testMediaCodec(JNIEnv *, jobject, jstring , jstring );
+
 #ifdef __cplusplus
 }
 #endif

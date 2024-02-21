@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2021-06-15 17:16:24
  * LastEditors: liguoqiang
- * LastEditTime: 2023-11-25 15:32:11
+ * LastEditTime: 2024-02-08 00:18:02
  * Description: 
 ********************************************************************************/
 
@@ -27,15 +27,14 @@
 #undef _WIN32_WINNT
 #define WIN32_LEAN_AND_MEAN
 #define _WIN32_WINNT 0x0400
-typedef unsigned __int64 uint64;
-typedef __int64 int64;
+typedef unsigned __int64 vuint64_t;
+typedef __int64 vint64_t;
 
 #include <cstring>
 
 #else
-typedef unsigned long long uint64;
-typedef long long int64;
-
+typedef unsigned long long vuint64_t;
+typedef long long vint64_t;
 #include <string.h>
 #endif
 

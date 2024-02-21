@@ -28,4 +28,5 @@ public class MediaJni {
 
     public native int openMediaServer(String logfile, IDecodeListener listener);
     public native void closeMediaServer();
+    public native void testMediaCodec(String inputFile, String outputFile);
 }

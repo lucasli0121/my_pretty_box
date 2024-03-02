@@ -34,6 +34,11 @@ static EGLDisplay _eglDisplay = NULL;
 static GLubyte *_pixelsBuf = NULL;
 static int _defaultBufSize = 1024*1024;
 static bool _initContexOk = false;
+static bool _setJvmToCodec = true;
+static bool _useSdk = true;
+static bool _enableCodec = true;
+static int _localPort = 1935;
+static char _remoteUrl[255];
 typedef enum {
     VIDEO_DATA = 0,
     AUDIO_DATA = 1
@@ -49,8 +54,6 @@ typedef struct {
 }TimeStampData;
 static std::queue<TimeStampData> _queueData;
 static std::mutex _queueMutex;
-static std::thread *_dataThread = NULL;
-static bool _threadRun = false;
 
 #define LogDebug(...) __android_log_print(ANDROID_LOG_DEBUG, "MediaJni", __VA_ARGS__)
 #define LogError(...) __android_log_print(ANDROID_LOG_ERROR, "MediaJni", __VA_ARGS__)
@@ -308,7 +311,7 @@ static void toTexture(unsigned char* data, int len, int w, int h, int keyframe)
     if(_needDetach) {
         _javaVM->DetachCurrentThread();
     }
-    if(jBuf) {
+    if(jBuf && _setJvmToCodec) {
         env->DeleteLocalRef(jBuf);
     }
 }
@@ -355,27 +358,7 @@ static uint8_t  _curVideoAbsTimestamp = 1;
 static u_long _lastTime = 0;
 static long _delayTime = 0;
 static int _fpsUnit = 0;
-static void checkAndSendAudioData()
-{
-    while(_queueData.size() > 0) {
-        TimeStampData audioData = _queueData.front();
-        if (audioData.videoTimeStamp <= _curVideoTimestamp) {
-            LogDebug("audio, videoTimeStamp=%d, curVideoTimestamp=%d, audiotimestamp=%d", audioData.videoTimeStamp, _curVideoTimestamp, audioData.timeStamp);
-            switch (audioData.type) {
-                case AUDIO_DATA:
-                    sendAudioData(_rtmpClient, reinterpret_cast<const char *>(audioData.data),
-                                  audioData.size, audioData.timeStamp, audioData.absTimeStamp);
-                    break;
-            }
-            free(audioData.data);
-            _queueMutex.lock();
-            _queueData.pop();
-            _queueMutex.unlock();
-        } else {
-            break;
-        }
-    }
-}
+
 static void cleanQueue()
 {
     _queueMutex.lock();
@@ -425,7 +408,14 @@ static void encodeFunc(vbyte8_ptr data, vint32_t len, vint64_t pts, vint64_t dts
  */
 static void decodeFunc(unsigned char* data, int len, int width, int height, int keyframe, void* user_data)
 {
-    toTexture(data, len, width, height, keyframe);
+    if (len == 0 || data == NULL) {
+        return;
+    }
+    if(_useSdk) {
+        toTexture(data, len, width, height, keyframe);
+    } else {
+        encoder_from_rgba(_encodec, (vbyte8_ptr) data, len, width, height, keyframe);
+    }
 //    int ret = 0;
 //    if(_texFile != NULL) {
 //        ret = fwrite(data, len, 1, _texFile);
@@ -471,7 +461,11 @@ static void rtmpVideoReceiv(const char *data, int size, unsigned long timestamp,
     _fpsUnit = timestamp - _orgVideoTimestamp;
     _orgVideoTimestamp = timestamp;
     _orgVideoAbsTimestamp = absTimestamp;
-    decode_to_rgba(_decodec, (vbyte8_ptr)data, size);
+    if(_enableCodec) {
+        decode_to_rgba(_decodec, (vbyte8_ptr) data, size);
+    } else {
+        encodeFunc((vbyte8_ptr) data, size, 0, 0, 0);
+    }
 }
 static void rtmpAudioReceiv(const char *data, int size, unsigned long timestamp, uint8_t absTimestamp,  void* user_data)
 {
@@ -498,24 +492,16 @@ static void rtmpAudioReceiv(const char *data, int size, unsigned long timestamp,
     _queueData.push(audioData);
     _queueMutex.unlock();
 }
-static void handleThreadData()
-{
-//    while(_threadRun) {
-//        if(_queueData.size() == 0) {
-//            sleep_m(30);
-//            continue;
-//        }
-//        checkAndSendAudioData();
-//        sleep_m(1);
-//    }
-}
+
 /*
  *  jni 初次调用的onLoad
  */
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
 {
     _javaVM = vm;
-    set_jni_env(vm);
+    if(_setJvmToCodec) {
+        set_jni_env(vm);
+    }
     return JNI_VERSION_1_6;
 }
 
@@ -525,6 +511,20 @@ JNIEXPORT void JNI_OnUnload(JavaVM *jvm, void *reserved) {
 
 /*
  * Class:     com_medialib_jni_MediaJni
+ * Method:    setParams
+ * Signature: (III;Lava/lang/string;)V
+ */
+extern "C" JNIEXPORT void JNICALL Java_com_medialib_jni_MediaJni_setParams
+        (JNIEnv *env, jobject, int use_sdk, int enable_codec,int local_port, jstring url)
+{
+    _useSdk = use_sdk;
+    _enableCodec = enable_codec;
+    _localPort = local_port;
+    char* curl = js2c(env, url);
+    snprintf(_remoteUrl, sizeof(_remoteUrl), "%s", curl);
+}
+/*
+ * Class:     com_medialib_jni_MediaJni
  * Method:    openMediaServer
  * Signature: (Ljava/lang/String;Lcom/medialib/jni/MediaJni/IDecodeYuvListener;)I
  */
@@ -532,6 +532,7 @@ extern "C" JNIEXPORT jint JNICALL Java_com_medialib_jni_MediaJni_openMediaServer
         (JNIEnv *env, jobject jthe, jstring path, jobject callBack)
 {
     int ret = 0;
+    RTMP_REQUEST *request = NULL;
     char* cPath = js2c(env, path);
     sprintf(_modulePath, "%s", cPath);
     char log[255];
@@ -552,7 +553,9 @@ extern "C" JNIEXPORT jint JNICALL Java_com_medialib_jni_MediaJni_openMediaServer
         goto error;
     }
     set_video_encode_callback(_encodec, encodeFunc, 0);
-    _rtmpServer = openRtmpServer(getDefaultRtmpRequest());
+    request = getDefaultRtmpRequest();
+    request->rtmpport = _localPort;
+    _rtmpServer = openRtmpServer(request);
     if(_rtmpServer == NULL) {
         LogError("openRtmpServer failed");
         goto error;
@@ -563,24 +566,20 @@ extern "C" JNIEXPORT jint JNICALL Java_com_medialib_jni_MediaJni_openMediaServer
     setRtmpBeginPublishCallback(rtmpBeginPublish, NULL);
     char rtmpLog[255];
     sprintf(rtmpLog, "%srtmpclient.log", _modulePath);
-    char ipaddr[255];
 //    sprintf(ipaddr, "rtmp://120.79.139.90:1935/live/test");
-    sprintf(ipaddr, "rtmp://192.168.1.103:1935/live/test");
-    _rtmpClient = startRtmpClient(ipaddr, rtmpLog);
+    _rtmpClient = startRtmpClient(_remoteUrl, rtmpLog);
     if(_rtmpClient == NULL)
     {
-        LogError("startRtmpClient failed, rtmp server ip=%s", ipaddr);
+        LogError("startRtmpClient failed, rtmp server ip=%s", _remoteUrl);
         goto error;
     }
     if (_pixelsBuf == NULL) {
         _pixelsBuf = (GLubyte*)malloc(_defaultBufSize);
     }
     _jcallBack = (*env).NewGlobalRef(callBack);
-    _threadRun = true;
-    _dataThread = new std::thread(handleThreadData);
     char name[255];
-    sprintf(name, "%sdst.264", _modulePath);
-//    _texFile = fopen(name, "wb");
+    sprintf(name, "%sdst.yuv", _modulePath);
+    _texFile = fopen(name, "wb");
     return 0;
 error:
     if(_decodec != 0) {
@@ -610,10 +609,10 @@ error:
  */
 extern "C" JNIEXPORT void JNICALL Java_com_medialib_jni_MediaJni_closeMediaServer(JNIEnv *, jobject)
 {
-//    if(_texFile != NULL) {
-//        fclose(_texFile);
-//        _texFile = NULL;
-//    }
+    if(_texFile != NULL) {
+        fclose(_texFile);
+        _texFile = NULL;
+    }
     releaseTextureIds();
     uninitEGLContext();
     if(_decodec != 0) {
@@ -631,8 +630,6 @@ extern "C" JNIEXPORT void JNICALL Java_com_medialib_jni_MediaJni_closeMediaServe
     if(_pixelsBuf) {
         free(_pixelsBuf);
     }
-    _dataThread->join();
-    delete _dataThread;
     codec_unini();
 }
 

@@ -14,6 +14,7 @@ import android.view.SurfaceView
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.media.demo.obj.BoxConf
 import com.media.demo.util.AssetFile
 import com.media.demo.util.PermissionsUtils
 import com.medialib.jni.MediaJni
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private val REQUEST_CODE_PERMISSIONS = 10
     private val mediaJni = MediaJni()
     private var mhManager: MHBeautyManager? = null
+    private var boxCfg = BoxConf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MainApplication.setCurrentActivity(this)
@@ -60,6 +62,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         setContentView(R.layout.activity_main)
+        if(!boxCfg.initConfig(this)) {
+            Log.e("MainActivity", "init json config failed")
+            finish()
+        }
+        mediaJni.setParams(boxCfg.useSdk, boxCfg.enableDecode, boxCfg.rtmpLocalPort, boxCfg.rtmpRemoteUrl)
         mhManagerInit()
         var glSurface = findViewById<SurfaceView>(R.id.gl_surface)
         glSurface.holder.addCallback(object: SurfaceHolder.Callback {
@@ -87,21 +94,21 @@ class MainActivity : AppCompatActivity() {
     private fun mhManagerInit() {
         MhDataManager.getInstance().create(applicationContext)
         mhManager = MHBeautyManager(this)
-        mhManager?.setSkinWhiting(8)
-        mhManager?.setSkinSmooth(9)
-        mhManager?.setBrightness(50)
-        mhManager?.setBigEye(100)
-        mhManager?.setFaceLift(100)
-        mhManager?.setMouseLift(100)
-        mhManager?.setNoseLift(100)
-        mhManager?.setChinLift(100)
-        mhManager?.setForeheadLift(100)
-        mhManager?.setEyeBrow(100)
-        mhManager?.setEyeCorner(100)
-        mhManager?.setEyeLength(100)
-        mhManager?.setEyeAlat(100)
-        mhManager?.setFaceShave(100)
-        mhManager?.setLengthenNoseLift(100)
+        mhManager?.setSkinWhiting(boxCfg.skinWhiting)
+        mhManager?.setSkinSmooth(boxCfg.skinSmooth)
+        mhManager?.setBrightness(boxCfg.brightness)
+        mhManager?.setBigEye(boxCfg.bigEye)
+        mhManager?.setFaceLift(boxCfg.faceLift)
+        mhManager?.setMouseLift(boxCfg.mouseLift)
+        mhManager?.setNoseLift(boxCfg.noseLift)
+        mhManager?.setChinLift(boxCfg.chinLift)
+        mhManager?.setForeheadLift(boxCfg.foreHeadLift)
+        mhManager?.setEyeBrow(boxCfg.eyeBrow)
+        mhManager?.setEyeCorner(boxCfg.eyeCorner)
+        mhManager?.setEyeLength(boxCfg.eyeLength)
+        mhManager?.setEyeAlat(50)
+        mhManager?.setFaceShave(50)
+        mhManager?.setLengthenNoseLift(50)
         var userfaces = mhManager?.useFaces
         if (userfaces != null && userfaces.isNotEmpty()) {
             userfaces[0] = 1

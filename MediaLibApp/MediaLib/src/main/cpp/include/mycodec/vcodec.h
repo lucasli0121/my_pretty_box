@@ -15,9 +15,13 @@
 #ifndef __VCODEC_H
 #define __VCODEC_H 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "video_def.h"
 #include "libavutil/pixfmt.h"
-
+#include "libavutil/hwcontext.h"
 
 struct AVCodecContext;
 struct AVFrame;
@@ -35,6 +39,7 @@ public:
 	void test_hw_decode(const_char_ptr filename, const_char_ptr outfilename);
 
 	void set_video_size(int w, int h);
+	void set_sps_pps(vbyte8_ptr sps, vint32_t spslen, vbyte8_ptr pps, vint32_t ppslen);
 	
 	vint32_t encoder_from_rgba(vbyte8_ptr srcdata, vint32_t srclen, vint32_t width, vint32_t height, vint32_t keyframe);
 	/*encoder video source format is yuv420p*/
@@ -97,7 +102,14 @@ private:
 	vint32_t _frame_interval;
 	AVBufferRef * _hw_device_ctx;
 	enum AVHWDeviceType _hw_device_type;
+	vbyte8_ptr _sps;
+	vint32_t _spslen;
+	vbyte8_ptr _pps;
+	vint32_t _ppslen;
 	bool _use_libyuv;
 };
 
+#ifdef __cplusplus
+}
+#endif
 #endif

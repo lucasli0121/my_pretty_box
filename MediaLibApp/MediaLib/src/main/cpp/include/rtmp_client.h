@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2024-01-16 10:04:05
  * LastEditors: liguoqiang
- * LastEditTime: 2024-02-19 17:38:07
+ * LastEditTime: 2024-02-20 13:50:17
  * Description: 
 ********************************************************************************/
 #ifndef __RTMP_CLIENT_H__
@@ -32,8 +32,8 @@ typedef struct RTMP_CLIENT
     FifoAgent * dataFifo;
     int runThread;
     THANDLE clientThreadId;
-    FILE * logFile;
-    
+    int hasSendSps;
+    int hasSendMeta;
 } RTMP_CLIENT;
 
 RTMP_CLIENT* startRtmpClient(char *url, char *logFileName);

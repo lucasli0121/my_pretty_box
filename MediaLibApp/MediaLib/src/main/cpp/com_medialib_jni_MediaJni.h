@@ -7,6 +7,16 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+
+/*
+ * Class:     com_medialib_jni_MediaJni
+ * Method:    setParams
+ * Signature: (III;Lava/lang/string;)V
+ */
+JNIEXPORT void JNICALL Java_com_medialib_jni_MediaJni_setParams
+        (JNIEnv *, jobject, int use_sdk, int enable_codec, int local_port, jstring url);
+
 /*
  * Class:     com_medialib_jni_MediaJni
  * Method:    openMediaServer

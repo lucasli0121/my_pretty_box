@@ -1,3 +1,10 @@
+/*
+ * @Author: liguoqiang
+ * @Date: 2024-01-13 07:09:03
+ * @LastEditors: liguoqiang
+ * @LastEditTime: 2024-02-27 19:50:02
+ * @Description: 
+ */
 /******************************************************************************
  * Author: liguoqiang
  * Date: 2023-12-23 23:32:02
@@ -18,6 +25,7 @@ extern "C" {
 typedef void (*VideoCallbackFunc)(const char *data, int size, unsigned long timestamp, uint8_t absTimestamp, int key, void* user_data);
 typedef void (*AudioCallbackFunc)(const char *data, int size, unsigned long timestamp, uint8_t absTimestamp, void* user_data);
 typedef void (*BeginPublishFunc)(void* user_data);
+typedef void (*SpsPpsCallbackFunc)(const char *sps, int spsSize, const char *pps, int ppsSize, void* user_data);
 
 enum
 {
@@ -48,6 +56,7 @@ typedef struct
   BeginPublishFunc beginPublishFunc;
   VideoCallbackFunc videoFunc;
   AudioCallbackFunc audioFunc;
+  SpsPpsCallbackFunc spsPpsFunc;
   void *user_data;
   char* videoBuffer;
   int videoBufferSize;

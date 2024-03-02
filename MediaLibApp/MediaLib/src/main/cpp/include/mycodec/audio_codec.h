@@ -2,7 +2,7 @@
  * @Author: liguoqiang
  * @Date: 2017-07-24 11:00:42
  * @LastEditors: liguoqiang
- * @LastEditTime: 2021-06-14 23:37:40
+ * @LastEditTime: 2024-02-25 12:00:34
  * @Description: 
  */
 /*
@@ -14,6 +14,10 @@
 
 #ifndef __AUDIO_CODEC_H
 #define __AUDIO_CODEC_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "stream_buffer.h"
 #include "audio_def.h"
@@ -50,5 +54,9 @@ private:
 	AVPacket* _outPk;
 	
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -54,6 +54,7 @@ void closeRtmpServer(RTMP_SERVER *rtmpServer);
 void setRtmpVideoCallback(VideoCallbackFunc videoFunc, void *user_data);
 void setRtmpAudioCallback(AudioCallbackFunc audioFunc, void *user_data);
 void setRtmpBeginPublishCallback(BeginPublishFunc beginPublishFunc, void *user_data);
+void setRtmpSpsPpsCallback(SpsPpsCallbackFunc spsPpsFunc, void *user_data);
 int getRtmpMetaData(char** metaData);
 void getRtmpDataFrame(MetaData *metaData);
 

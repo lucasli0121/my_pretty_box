@@ -30,6 +30,7 @@ void set_jni_env(void* env);
 void set_video_size(vint64_t codec, vint32_t w, vint32_t h);
 VideoParam* get_video_param(vint64_t codec);
 void set_video_param(vint64_t codec, const VideoParam* param);
+void set_video_sps_pps(vint64_t codec, vbyte8_ptr sps, vint32_t spslen, vbyte8_ptr pps, vint32_t ppslen);
 
 vint32_t encoder_from_rgba(vint64_t codec, vbyte8_ptr srcdata,	vint32_t srclen, vint32_t width, vint32_t height, vint32_t keyframe);
 

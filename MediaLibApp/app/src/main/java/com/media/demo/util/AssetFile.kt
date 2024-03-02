@@ -40,6 +40,20 @@ object AssetFile {
         return assetSdPath(context) + "output.yuv"
     }
 
+    fun readJsonConfig(context: Context?): String {
+        var result: String = ""
+        try {
+            val fIn = FileInputStream(assetSdPath(context) + "/box.json")
+            val bRd = BufferedReader(InputStreamReader(fIn))
+            if(bRd.ready()) {
+                result = bRd.readText()
+            }
+            bRd.close()
+            fIn.close()
+        } catch (e: Exception) {
+        }
+        return result
+    }
     fun readVersion(context: Context?): String {
         var ver = "pad_std"
         try {

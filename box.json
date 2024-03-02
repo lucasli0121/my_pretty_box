@@ -1,0 +1,18 @@
+{
+  "rtmp_local_port": 1935,
+  "rtmp_remote_url": "rtmp://192.168.1.103:1935/live/test",
+  "use_sdk": 0,
+  "enable_decode": 1,
+  "skin_whiting": 8,
+  "skin_smooth": 8,
+  "brightness": 50,
+  "big_eye": 80,
+  "face_lift": 80,
+  "mouse_lift": 80,
+  "nose_lift": 80,
+  "chin_lift": 80,
+  "fore_head_lift": 80,
+  "eye_brow": 80,
+  "eye_corner": 80,
+  "eye_length": 80
+}

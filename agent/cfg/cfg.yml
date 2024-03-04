@@ -1,0 +1,28 @@
+server:
+  host: 120.79.139.90:8089
+  out_url: https://127.0.0.1:8089//
+database:
+  url: tcp(120.79.139.90:9306)
+  #url: tcp(8.217.217.243:9306)
+  username: hjy
+  password: hjy123
+  dbname: hjy
+
+mq:
+  host: 8.217.217.243
+  port: 1883
+  client_id: agent_mqtt_client_0
+  username: hjy
+  password: hjy123
+
+log:
+  level: debug
+  file: ./log/agent.log
+  maxsize: 100
+  maxage: 7
+  maxbackups: 10
+  console: true
+  format: text  
+  
+staticPath: ./public
+logFile: ./log/agent.log

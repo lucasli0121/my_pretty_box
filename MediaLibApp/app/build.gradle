@@ -92,10 +92,12 @@ dependencies {
     implementation(platform(Libs.Http.okHttp3Bom))
     implementation(Libs.Http.okHttp3)
     implementation(Libs.Http.okHttpLogging)
+    implementation(Libs.Http.asyncHttp)
     implementation('com.github.humorousz:FrameSequenceDrawable:1.0.1-SNAPSHOT')
 
     implementation project(':MediaLib')
     implementation project(':mhui')
+    implementation project(path: ':updateLibrary')
 //    api(name:'MHSDK-4.2.1', ext:'aar')
 
     testImplementation Libs.junit

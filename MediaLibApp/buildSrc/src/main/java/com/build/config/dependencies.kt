@@ -21,9 +21,8 @@ object Versions {
     const val buildToolsVersion = "33.0.1"
     const val minSdkVersion = 26
     const val targetSdkVersion = 33
-    const val versionCode = 202311180
+    const val versionCode = 202403032
     const val versionName = "1.1.3"
-//    const val appId = "com.health.thing"
 
     const val gradleVersion = "8.1.1"
     const val kotlinVersion = "1.9.0"

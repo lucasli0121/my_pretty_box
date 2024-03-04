@@ -26,6 +26,7 @@
             <option value="$PROJECT_DIR$/buildSec" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/mhui" />
+            <option value="$PROJECT_DIR$/updateLibrary" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

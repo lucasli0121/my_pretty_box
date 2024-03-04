@@ -1,0 +1,31 @@
+1、参数配置
+参数文件名：box.json
+存放位置：sdcard/Android/data/com.media.demo/files
+取到本地的命令：adb pull sdcard/Android/data/com.media.demo/files/box.json
+修改后存入盒子命令: adb push sdcard/Android/data/com.media.demo/files/box.json
+参数说明：
+{
+  "rtmp_local_port": 1935,    // 盒子APP本地运行RTMP服务端口
+  "rtmp_remote_url": "rtmp://192.168.1.103:1935/live/test",  // 盒子APP远程推送第三方RTMP服务器URL接口
+  "use_sdk": 1,   // 是否启用美颜SDK
+  "enable_decode": 1,  //是否启用编解码，如果此项为0时，use_sdk参数失效
+  "skin_whiting": 8,   // 美白 [0,9]
+  "skin_smooth": 8, // 磨皮 [0，9]
+  "brightness": 50, // 亮度 [0, 100]
+  "big_eye": 80, // 大眼 [0, 100]
+  "face_lift": 80,  // 瘦脸 [0, 100]
+  "mouse_lift": 80,  // 嘴型 [0, 100]
+  "nose_lift": 80,  // 瘦鼻 [0, 100]
+  "chin_lift": 80,  // 下巴 [0, 100]
+  "fore_head_lift": 80,   // 额头 [0, 100]
+  "eye_brow": 80,  // 眉毛 [0, 100]
+  "eye_corner": 80,  //眼角 [0, 100]
+  "eye_length": 80  //眼距 [0， 100]
+}
+
+2、每次参数修改后，需要重启APP
+启动命令：adb shell am start -n com.media.demo/.MainActivity
+
+3、APP可以远程升级，每次重启APP会自动检查版本，如果有新版本会自动更新并重启
+查看版本命令：
+windows下：adb shell dumpsys package com.media.demo | findstr versionCode

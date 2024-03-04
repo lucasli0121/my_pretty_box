@@ -1,0 +1,59 @@
+import com.build.config.*
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+}
+
+android {
+    compileSdkVersion Versions.compileSdkVersion
+    buildToolsVersion Versions.buildToolsVersion
+    namespace 'com.updatalibrary'
+    defaultConfig {
+        minSdkVersion Versions.minSdkVersion
+        targetSdkVersion Versions.targetSdkVersion
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+    buildTypes {
+        release {
+            //混淆
+            minifyEnabled false
+            //移除无用的resource文件
+            // shrinkResources true
+            //zipalign优化
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+        freeCompilerArgs = ['-Xjvm-default=all-compatibility']
+    }
+    buildFeatures{
+        viewBinding true
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.aar'])
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    implementation(platform(Libs.Kotlin.kotlinBom))
+    implementation Libs.AndroidX.coreKtx
+    implementation Libs.Coroutines.android
+    implementation(Libs.AndroidX.annotation)
+    implementation Libs.AndroidX.appcompat
+    implementation(Libs.AndroidX.constraintLayout)
+    implementation Libs.Material.material
+    implementation(Libs.Material.material3)
+    implementation Libs.Http.asyncHttp
+    testImplementation Libs.junit
+    androidTestImplementation Libs.AndroidX.Test.Ext.junit
+    androidTestImplementation Libs.AndroidX.Test.espressoCore
+}

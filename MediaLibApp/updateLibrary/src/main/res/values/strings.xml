@@ -1,0 +1,11 @@
+<resources>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="app_update_title" >软件升级</string>
+    <string name="app_update_info" >发现新的版本，请进行升级到新版本!</string>
+    <string name="app_update_ok" >立即升级</string>
+    <string name="app_update_cancel" >暂不升级</string>
+    <string name="app_updating" >正在更新</string>
+    <string name="notify_title" translatable="false">更新通知</string>
+    <string name="no_new_version" translatable="false">没有发现新版本</string>
+</resources>

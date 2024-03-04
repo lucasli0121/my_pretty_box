@@ -20,6 +20,7 @@ import com.media.demo.util.PermissionsUtils
 import com.medialib.jni.MediaJni
 import com.meihu.beauty.utils.MhDataManager
 import com.meihu.beautylibrary.manager.MHBeautyManager
+import com.updatelibrary.UpdateMgr
 import kotlinx.coroutines.async
 
 class MainActivity : AppCompatActivity() {
@@ -30,10 +31,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MainApplication.setCurrentActivity(this)
+
         //设置底部虚拟状态栏为透明，并且可以充满，4.4以上才有
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
         }
+        var upgrade = UpdateMgr(this)
+        upgrade.checkUpdate(true)
         //权限申请使用
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             val PERMISSIONS = arrayOf(

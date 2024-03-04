@@ -1,7 +1,7 @@
 {
   "rtmp_local_port": 1935,
   "rtmp_remote_url": "rtmp://192.168.1.103:1935/live/test",
-  "use_sdk": 0,
+  "use_sdk": 1,
   "enable_decode": 1,
   "skin_whiting": 8,
   "skin_smooth": 8,

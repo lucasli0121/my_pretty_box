@@ -1,0 +1,11 @@
+<resources>
+    <string name="ok" translatable="false">確定</string>
+    <string name="cancel" translatable="false">取消</string>
+    <string name="app_update_title" translatable="false">軟件升級</string>
+    <string name="app_update_info" translatable="false">發現新的版本，請進行升級到新版本</string>
+    <string name="app_update_ok" translatable="false">立即升級</string>
+    <string name="app_update_cancel" translatable="false">暫不升級</string>
+    <string name="app_updating" translatable="false">正在更新</string>
+    <string name="notify_title" translatable="false">更新通知</string>
+    <string name="no_new_version" translatable="false">沒有發現新版本</string>
+</resources>

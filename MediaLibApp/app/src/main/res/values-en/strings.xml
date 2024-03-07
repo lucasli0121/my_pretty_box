@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">mediaDemo</string>
+    <string name="beauty_mh_001">Sticker</string>
+    <string name="beauty_mh_002">Beauty</string>
+    <string name="beauty_mh_003">Effects</string>
+    <string name="beauty_mh_004">Mirror</string>
+    <string name="beauty_mh_005">BasicSticker</string>
+    <string name="beauty_mh_006">SeniorSticker</string>
+    <string name="beauty_mh_007">BasicMask</string>
+    <string name="beauty_mh_008">SeniorMask</string>
+    <string name="beauty_mh_009">Sticker download failed</string>
+    <string name="beauty_mh_010">Beauty</string>
+    <string name="beauty_mh_011">BeautyFace</string>
+    <string name="beauty_mh_012">QuickBeauty</string>
+    <string name="beauty_mh_013">Filter</string>
+    <string name="beauty_mh_014">Watermark</string>
+    <string name="beauty_mh_015">Action</string>
+    <string name="beauty_mh_016">Makeup</string>
+    <string name="beauty_mh_no">Original</string>
+    <string name="beauty_mh_meibai">White</string>
+    <string name="beauty_mh_mopi">Buffing</string>
+    <string name="beauty_mh_hongrun">Ruddy</string>
+    <string name="beauty_mh_liangdu">Brightness</string>
+    <string name="beauty_mh_dayan">BigEye</string>
+    <string name="beauty_mh_meimao">Eyebrow</string>
+    <string name="beauty_mh_yanju">EyeSpan</string>
+    <string name="beauty_mh_yanjiao">Canthus</string>
+    <string name="beauty_mh_shoulian">ThinFace</string>
+    <string name="beauty_mh_zuixing">Mouth</string>
+    <string name="beauty_mh_shoubi">ThinNose</string>
+    <string name="beauty_mh_xiaba">Chin</string>
+    <string name="beauty_mh_etou">Forehead</string>
+    <string name="beauty_mh_changbi">LongNose</string>
+    <string name="beauty_mh_xuelian">V Face</string>
+    <string name="beauty_mh_kaiyanjiao">OpenCanthus</string>
+    <string name="beauty_mh_biaozhun">Standard</string>
+    <string name="beauty_mh_youya">Elegance</string>
+    <string name="beauty_mh_jingzhi">Exquisite</string>
+    <string name="beauty_mh_keai">Cute</string>
+    <string name="beauty_mh_ziran">Nature</string>
+    <string name="beauty_mh_wanghong">Net red</string>
+    <string name="beauty_mh_tuosu">Refined</string>
+    <string name="beauty_mh_gaoya">Elegant</string>
+    <string name="beauty_mh_filter_no">None</string>
+    <string name="beauty_mh_filter_langman">Romance</string>
+    <string name="beauty_mh_filter_qingxin">Fresh</string>
+    <string name="beauty_mh_filter_weimei">Aestheticism</string>
+    <string name="beauty_mh_filter_fennen">Fennen</string>
+    <string name="beauty_mh_filter_huaijiu">Nostalgia</string>
+    <string name="beauty_mh_filter_qingliang">Cool</string>
+    <string name="beauty_mh_filter_landiao">Blues</string>
+    <string name="beauty_mh_filter_rixi">Japanese</string>
+    <string name="beauty_mh_filter_chengshi">City</string>
+    <string name="beauty_mh_filter_chulian">First love</string>
+    <string name="beauty_mh_filter_chuxin">Initial center</string>
+    <string name="beauty_mh_filter_danse">Monochrome</string>
+    <string name="beauty_mh_filter_fanchase">Contrast color</string>
+    <string name="beauty_mh_filter_hupo">Amber</string>
+    <string name="beauty_mh_filter_meiwei">Delicious</string>
+    <string name="beauty_mh_filter_mitaofen">Peach powder</string>
+    <string name="beauty_mh_filter_naicha">Milk tea</string>
+    <string name="beauty_mh_filter_pailide">Polaroid</string>
+    <string name="beauty_mh_filter_wutuobang">Utopia</string>
+    <string name="beauty_mh_filter_xiyou">Grapefruit</string>
+    <string name="beauty_mh_filter_riza">Japanese Magazine</string>
+    <string name="beauty_mh_pro_filter_heimao">Black cat</string>
+    <string name="beauty_mh_pro_filter_heibai">Black and white</string>
+    <string name="beauty_mh_pro_filter_bulukelin">Brooklyn</string>
+    <string name="beauty_mh_pro_filter_pingjing">Calm</string>
+    <string name="beauty_mh_pro_filter_lengku">Cold</string>
+    <string name="beauty_mh_pro_filter_kaiwen">Kevin</string>
+    <string name="beauty_mh_pro_filter_lianai">Love</string>
+    <string name="beauty_mh_pro_filter_jianbao">Brief report</string>
+
+    <string name="beauty_mh_texiao_linghun">Soul out of body</string>
+    <string name="beauty_mh_texiao_doudong">Jitter</string>
+    <string name="beauty_mh_texiao_shanbai">Flash white</string>
+    <string name="beauty_mh_texiao_maoci">Burr</string>
+    <string name="beauty_mh_texiao_huanjue">Illusion</string>
+    <string name="beauty_mh_texiao_msk">Mosaic1</string>
+    <string name="beauty_mh_texiao_msk_yuan">Mosaic2</string>
+    <string name="beauty_mh_texiao_msk_san">Mosaic3</string>
+    <string name="beauty_mh_texiao_msk_liu">Mosaic4</string>
+    <string name="beauty_mh_texiao_action_no">Original</string>
+    <string name="beauty_mh_texiao_action_head">Header</string>
+    <string name="beauty_mh_texiao_action_mouth">Open your mouth</string>
+    <string name="beauty_mh_texiao_action_eye">Blink</string>
+    <string name="beauty_mh_haha_waixingren">UFO</string>
+    <string name="beauty_mh_haha_li">Pear face</string>
+    <string name="beauty_mh_haha_shou">Thin face</string>
+    <string name="beauty_mh_haha_jingxiang">Mirror face</string>
+    <string name="beauty_mh_haha_pianduan">Segment face</string>
+    <string name="beauty_mh_haha_daoying">Water reflection</string>
+    <string name="beauty_mh_haha_xuanzhuan">Spiral mirror</string>
+    <string name="beauty_mh_haha_yuyan">Fisheye camera</string>
+    <string name="beauty_mh_haha_zuoyou">Mirror left and right</string>
+
+    <string name="beauty_mh_makeup_none">Original</string>
+    <string name="beauty_mh_makeup_jiemao">Eyelashes</string>
+    <string name="beauty_mh_makeup_chuncai">Lip gloss</string>
+    <string name="beauty_mh_makeup_saihong">Blush</string>
+    <string name="beauty_mh_makeup_yanying">Eye shadow</string>
+    <string name="beauty_mh_makeup_yanxian">Eyeliner</string>
+
+    <string name="beauty_none"></string>
+
+    <string name="beauty_mh_texiao_action_head_tip">Look up</string>
+    <string name="beauty_mh_texiao_action_mouth_tip">Open your mouth</string>
+    <string name="beauty_mh_texiao_action_eye_tip">Blink</string>
+
+    <string name="beauty_mh_texiao_action_downloading">Sticker downloading, please wait</string>
+
+
+</resources>

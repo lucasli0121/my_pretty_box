@@ -454,7 +454,9 @@ static void rtmpVideoReceiv(const char *data, int size, unsigned long timestamp,
         int dataSize = getRtmpMetaData(&frameData);
         if(dataSize > 0) {
             getRtmpDataFrame(&_metaData);
-            setMetaData(_rtmpClient, frameData, dataSize);
+            if(_rtmpClient) {
+                setMetaData(_rtmpClient, frameData, dataSize);
+            }
         }
         _lastTime = getTimeStamp();
     }
@@ -475,7 +477,9 @@ static void rtmpAudioReceiv(const char *data, int size, unsigned long timestamp,
         int dataSize = getRtmpMetaData(&frameData);
         if(dataSize > 0) {
             getRtmpDataFrame(&_metaData);
-            setMetaData(_rtmpClient, frameData, dataSize);
+            if(_rtmpClient) {
+                setMetaData(_rtmpClient, frameData, dataSize);
+            }
         }
     }
 
@@ -553,17 +557,6 @@ extern "C" JNIEXPORT jint JNICALL Java_com_medialib_jni_MediaJni_openMediaServer
         goto error;
     }
     set_video_encode_callback(_encodec, encodeFunc, 0);
-    request = getDefaultRtmpRequest();
-    request->rtmpport = _localPort;
-    _rtmpServer = openRtmpServer(request);
-    if(_rtmpServer == NULL) {
-        LogError("openRtmpServer failed");
-        goto error;
-    }
-    _rtmpServer->needRawVideo = 0;
-    setRtmpVideoCallback(rtmpVideoReceiv, NULL);
-    setRtmpAudioCallback(rtmpAudioReceiv, NULL);
-    setRtmpBeginPublishCallback(rtmpBeginPublish, NULL);
     char rtmpLog[255];
     sprintf(rtmpLog, "%srtmpclient.log", _modulePath);
 //    sprintf(ipaddr, "rtmp://120.79.139.90:1935/live/test");
@@ -573,6 +566,17 @@ extern "C" JNIEXPORT jint JNICALL Java_com_medialib_jni_MediaJni_openMediaServer
         LogError("startRtmpClient failed, rtmp server ip=%s", _remoteUrl);
         goto error;
     }
+    request = getDefaultRtmpRequest();
+    request->rtmpport = _localPort;
+    _rtmpServer = openRtmpServer(request);
+    if(_rtmpServer == NULL) {
+        LogError("openRtmpServer failed, rtmpport=%d", request->rtmpport);
+        goto error;
+    }
+    _rtmpServer->needRawVideo = 0;
+    setRtmpVideoCallback(rtmpVideoReceiv, NULL);
+    setRtmpAudioCallback(rtmpAudioReceiv, NULL);
+    setRtmpBeginPublishCallback(rtmpBeginPublish, NULL);
     if (_pixelsBuf == NULL) {
         _pixelsBuf = (GLubyte*)malloc(_defaultBufSize);
     }

@@ -2,40 +2,36 @@ package com.media.demo
 
 import android.Manifest
 import android.content.Intent
-import android.opengl.GLES20
-import android.opengl.GLES30
-import android.opengl.GLSurfaceView
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.Surface
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.media.demo.obj.BoxConf
 import com.media.demo.util.AssetFile
 import com.media.demo.util.PermissionsUtils
 import com.medialib.jni.MediaJni
+import com.meihu.beauty.bean.MeiYanBean
+import com.meihu.beauty.bean.TeXiaoWaterBean
 import com.meihu.beauty.utils.MhDataManager
+import com.meihu.beautylibrary.MHSDK
+import com.meihu.beautylibrary.bean.MHCommonBean
+import com.meihu.beautylibrary.bean.MHConfigConstants
 import com.meihu.beautylibrary.manager.MHBeautyManager
 import com.updatelibrary.UpdateMgr
-import kotlinx.coroutines.async
 
 class MainActivity : AppCompatActivity() {
     private val REQUEST_CODE_PERMISSIONS = 10
     private val mediaJni = MediaJni()
     private var mhManager: MHBeautyManager? = null
     private var boxCfg = BoxConf()
+    private var waterList = ArrayList<TeXiaoWaterBean>()
+    private var beans = ArrayList<MHCommonBean>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MainApplication.setCurrentActivity(this)
 
-        //设置底部虚拟状态栏为透明，并且可以充满，4.4以上才有
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
-        }
         var upgrade = UpdateMgr(this)
         upgrade.checkUpdate(true)
         //权限申请使用
@@ -97,7 +93,118 @@ class MainActivity : AppCompatActivity() {
     }
     private fun mhManagerInit() {
         MhDataManager.getInstance().create(applicationContext)
-        mhManager = MHBeautyManager(this)
+        mhManager = MhDataManager.getInstance().mhBeautyManager
+//        mhManager = MHBeautyManager(this)
+        beans.add(
+            MeiYanBean(
+                R.string.beauty_mh_no,
+                R.mipmap.beauty_btn_drawing_default,
+                R.mipmap.beauty_btn_originaldrawing,
+                MHConfigConstants.MEI_YAN_MEI_XING_YUAN_TU
+            )
+        )
+        beans.add(
+            MeiYanBean(
+                R.string.beauty_mh_dayan,
+                R.mipmap.beauty_btn_eye_default,
+                R.mipmap.beauty_btn_eye_sele,
+                MHConfigConstants.MEI_YAN_MEI_XING_DA_YAN
+            )
+        )
+        beans.add(
+            MeiYanBean(
+                R.string.beauty_mh_shoulian,
+                R.mipmap.beauty_btn_face_default,
+                R.mipmap.beauty_btn_face_sele,
+                MHConfigConstants.MEI_YAN_MEI_XING_SHOU_LIAN
+            )
+        )
+        beans.add(
+            MeiYanBean(
+                R.string.beauty_mh_zuixing,
+                R.mipmap.beauty_btn_mouth_default,
+                R.mipmap.beauty_btn_mouth_sele,
+                MHConfigConstants.MEI_YAN_MEI_XING_ZUI_XING
+            )
+        )
+        beans.add(
+            MeiYanBean(
+                R.string.beauty_mh_shoubi,
+                R.mipmap.beauty_btn_thinnose_default,
+                R.mipmap.beauty_btn_thinnose_sele,
+                MHConfigConstants.MEI_YAN_MEI_XING_SHOU_BI
+            )
+        )
+        beans.add(
+            MeiYanBean(
+                R.string.beauty_mh_xiaba,
+                R.mipmap.beauty_btn_chin_default,
+                R.mipmap.beauty_btn_chin_sele,
+                MHConfigConstants.MEI_YAN_MEI_XING_XIA_BA
+            )
+        )
+        beans.add(
+            MeiYanBean(
+                R.string.beauty_mh_etou,
+                R.mipmap.beauty_btn_forehead_default,
+                R.mipmap.beauty_btn_forehead_sele,
+                MHConfigConstants.MEI_YAN_MEI_XING_E_TOU
+            )
+        )
+        beans.add(
+            MeiYanBean(
+                R.string.beauty_mh_meimao,
+                R.mipmap.beauty_btn_eyebrow_default,
+                R.mipmap.beauty_btn_eyebrow_sele,
+                MHConfigConstants.MEI_YAN_MEI_XING_MEI_MAO
+            )
+        )
+        beans.add(
+            MeiYanBean(
+                R.string.beauty_mh_yanjiao,
+                R.mipmap.beauty_btn_canth_default,
+                R.mipmap.beauty_btn_canth_sele,
+                MHConfigConstants.MEI_YAN_MEI_XING_YAN_JIAO
+            )
+        )
+        beans.add(
+            MeiYanBean(
+                R.string.beauty_mh_yanju,
+                R.mipmap.beauty_btn_eyespan_default,
+                R.mipmap.beauty_btn_eyespan_sele,
+                MHConfigConstants.MEI_YAN_MEI_XING_YAN_JU
+            )
+        )
+        beans.add(
+            MeiYanBean(
+                R.string.beauty_mh_kaiyanjiao,
+                R.mipmap.beauty_btn_openeye_default,
+                R.mipmap.beauty_btn_openeye_sele,
+                MHConfigConstants.MEI_YAN_MEI_XING_KAI_YAN_JIAO
+            )
+        )
+        beans.add(
+            MeiYanBean(
+                R.string.beauty_mh_xuelian,
+                R.mipmap.beauty_btn_cutface_default,
+                R.mipmap.beauty_btn_cutface_sele,
+                MHConfigConstants.MEI_YAN_MEI_XING_XUE_LIAN
+            )
+        )
+        beans.add(
+            MeiYanBean(
+                R.string.beauty_mh_changbi,
+                R.mipmap.beauty_btn_longnose_default,
+                R.mipmap.beauty_btn_longnose_sele,
+                MHConfigConstants.MEI_YAN_MEI_XING_CHANG_BI
+            )
+        )
+        beans = MHSDK.getFunctionItems(
+            beans,
+            MHConfigConstants.MEI_YAN,
+            MHConfigConstants.MEI_YAN_MEI_XING_FUNCION
+        ) as ArrayList<MHCommonBean>
+
         mhManager?.setSkinWhiting(boxCfg.skinWhiting)
         mhManager?.setSkinSmooth(boxCfg.skinSmooth)
         mhManager?.setBrightness(boxCfg.brightness)
@@ -113,6 +220,7 @@ class MainActivity : AppCompatActivity() {
         mhManager?.setEyeAlat(50)
         mhManager?.setFaceShave(50)
         mhManager?.setLengthenNoseLift(50)
+
         var userfaces = mhManager?.useFaces
         if (userfaces != null && userfaces.isNotEmpty()) {
             userfaces[0] = 1
@@ -122,6 +230,53 @@ class MainActivity : AppCompatActivity() {
             mhManager?.setUseFace(true)
             mhManager?.useFaces = userfaces
         }
+        waterList.add(TeXiaoWaterBean(com.meihu.beauty.R.mipmap.ic_mh_none, 0, MHSDK.WATER_NONE, true))
+        waterList.add(
+            TeXiaoWaterBean(
+                com.meihu.beauty.R.mipmap.ic_water_thumb_0,
+                com.meihu.beauty.R.mipmap.ic_water_res_0,
+                MHSDK.WATER_TOP_LEFT
+            )
+        )
+        waterList.add(
+            TeXiaoWaterBean(
+                com.meihu.beauty.R.mipmap.ic_water_thumb_1,
+                com.meihu.beauty.R.mipmap.ic_water_res_1,
+                MHSDK.WATER_TOP_RIGHT
+            )
+        )
+        waterList.add(
+            TeXiaoWaterBean(
+                com.meihu.beauty.R.mipmap.ic_water_thumb_2,
+                com.meihu.beauty.R.mipmap.ic_water_res_2,
+                MHSDK.WATER_BOTTOM_LEFT
+            )
+        )
+        waterList.add(
+            TeXiaoWaterBean(
+                com.meihu.beauty.R.mipmap.ic_water_thumb_3,
+                com.meihu.beauty.R.mipmap.ic_water_res_3,
+                MHSDK.WATER_BOTTOM_RIGHT
+            )
+        )
+        when(boxCfg.waterPos) {
+            MHSDK.WATER_TOP_LEFT -> {
+                MhDataManager.getInstance().setWater(R.mipmap.ic_water_res_0, MHSDK.WATER_TOP_LEFT)
+            }
+            MHSDK.WATER_TOP_RIGHT -> {
+                MhDataManager.getInstance().setWater(R.mipmap.ic_water_res_1, MHSDK.WATER_TOP_RIGHT)
+            }
+            MHSDK.WATER_BOTTOM_LEFT -> {
+                MhDataManager.getInstance().setWater(R.mipmap.ic_water_res_2, MHSDK.WATER_BOTTOM_LEFT)
+            }
+            MHSDK.WATER_BOTTOM_RIGHT -> {
+                MhDataManager.getInstance().setWater(R.mipmap.ic_water_res_3, MHSDK.WATER_BOTTOM_RIGHT)
+            }
+            else -> {
+
+            }
+        }
+
     }
     private fun reInitMhManager() {
         MhDataManager.getInstance().release()

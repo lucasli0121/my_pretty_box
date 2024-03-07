@@ -47,4 +47,11 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     -->
     <dimen name="widget_margin">8dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="view_beauty_viewpager">180dp</dimen>
+    <dimen name="view_beauty_capture_bottom">10dp</dimen>
+    <dimen name="view_beauty_height">230dp</dimen>
+
+    <dimen name="view_beauty_height_2">160dp</dimen>
+    <dimen name="view_beauty_height_3">320dp</dimen>
 </resources>

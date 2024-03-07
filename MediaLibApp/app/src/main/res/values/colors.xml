@@ -5,10 +5,43 @@
     <color name="colorAccent">#D81B60</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="red">#ff0000</color>
     <color name="light_gray">#f0efef</color>
     <color name="save_color">#fef6c7</color>
     <color name="cancel_color">#c7fef2</color>
     <color name="list_divider_color">#f68395</color>
     <color name="list_item_bg_color">#d8ece0</color>
+
+    <color name="global">#fe35c5</color>
+    <color name="background">@color/gray2</color>
+    <color name="transparent">#00000000</color>
+    <color name="textColor">#323232</color>
+    <color name="gray1">#969696</color>
+    <!--    <color name="gray2">#f5f5f5</color>-->
+    <color name="gray3">#c8c8c8</color>
+
+
+    <color name="gray4">#B4B4B4</color>
+    <color name="gray5">#dcdcdc</color>
+    <color name="yellow">#fffa37</color>
+    <color name="yellow2">#f0cd08</color>
+    <color name="yellow3">#FFF34D</color>
+    <color name="yellow4">#ffdd00</color>
+    <!--    <color name="textColor2">#646464</color>-->
+    <color name="red">#ff0000</color>
+    <color name="pk_red">#f03a40</color>
+    <color name="pk_blue">#2a92f7</color>
+    <color name="black1">#e6323232</color>
+    <color name="blue1">#1FC8F8</color>
+    <color name="blue2">#4998F7</color>
+
+    <color name="bg_white">#e6ffffff</color>
+
+    <color name="bg_black">#80000000</color>
+
+    <color name="gray2">#1affffff</color>
+    <color name="textColor2">#DCDCDC</color>
+    <color name="textColor3">#C8C8C8</color>
+    <color name="textColor4">#FFFFFFFF</color>
+    <color name="textColor5">@color/global</color>
+    <color name="textColor6">@color/global</color>
 </resources>

@@ -265,7 +265,7 @@ class UpdateMgr(private val mContext: Context) : TextHttpResponseHandler() {
                 showNoticeDialog()
             }
         } else {
-            ShowToast.displayToast(mContext, R.string.no_new_version)
+//            ShowToast.displayToast(mContext, R.string.no_new_version)
         }
     }
 }

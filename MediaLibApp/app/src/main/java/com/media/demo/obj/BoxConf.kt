@@ -22,6 +22,7 @@ class BoxConf : Serializable {
     var eyeBrow: Int = 80
     var eyeCorner: Int = 80
     var eyeLength: Int = 80
+    var waterPos: Int = 2000
 
     fun initConfig(context: Context): Boolean {
         var result: Boolean = false
@@ -45,6 +46,7 @@ class BoxConf : Serializable {
                 eyeBrow = jsObj.getInt("eye_brow")
                 eyeCorner = jsObj.getInt("eye_corner")
                 eyeLength = jsObj.getInt("eye_length")
+                waterPos = jsObj.getInt("water_pos")
                 result = true
             }
         }catch (e: Exception) {

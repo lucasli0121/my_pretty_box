@@ -32,13 +32,17 @@ static EGLContext _eglCtx = NULL;
 static EGLSurface _eglSurface = NULL;
 static EGLDisplay _eglDisplay = NULL;
 static GLubyte *_pixelsBuf = NULL;
-static int _defaultBufSize = 1024*1024;
+static int _defaultBufSize = (2*1024*1024);
 static bool _initContexOk = false;
 static bool _setJvmToCodec = true;
+static jbyteArray _jbyteAry = NULL;
+static int _jbyteSize = (2*1024*1024);
 static bool _useSdk = true;
 static bool _enableCodec = true;
 static int _localPort = 1935;
 static char _remoteUrl[255];
+static int _width = 0;
+static int _height = 0;
 typedef enum {
     VIDEO_DATA = 0,
     AUDIO_DATA = 1
@@ -92,15 +96,25 @@ static jstring ctojs(JNIEnv* env, const char* pat)
     jstring encoding = env->NewStringUTF("utf-8");
     return (jstring)env->NewObject(strClass, ctorID, bytes, encoding);
 }
-static jbyteArray ctojbyte(JNIEnv* env, const char* pat)
+static jbyteArray ctojbyte(JNIEnv* env, const char* pat, int len)
 {
-    jbyteArray bytes = env->NewByteArray(strlen(pat));
-    if (bytes == NULL) {
-        LogError("ctojbyte::NewByteArray OOM, len=%zu", strlen(pat));
-        return NULL;
+    if (len > _jbyteSize) {
+        if(_jbyteAry != nullptr) {
+            env->DeleteGlobalRef(_jbyteAry);
+            _jbyteAry = nullptr;
+        }
+        _jbyteSize = len;
     }
-    env->SetByteArrayRegion(bytes, 0, strlen(pat), (jbyte*)pat);
-    return bytes;
+    if (_jbyteAry == nullptr) {
+        jbyteArray jb = env->NewByteArray(_jbyteSize);
+        _jbyteAry = static_cast<jbyteArray>(env->NewGlobalRef(jb));
+    }
+    if(_jbyteAry == nullptr) {
+        LogError("ctojbyte::NewByteArray OOM, len=%d", _jbyteSize);
+        return nullptr;
+    }
+    env->SetByteArrayRegion(_jbyteAry, 0, len, (jbyte*)pat);
+    return _jbyteAry;
 }
 static u_long getTimeStamp()
 {
@@ -282,7 +296,7 @@ static void toTexture(unsigned char* data, int len, int w, int h, int keyframe)
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glBindTexture(GL_TEXTURE_2D, 0);
-        jBuf = ctojbyte(env, (char*)data);
+        jBuf = ctojbyte(env, (char*)data, len);
         if (jBuf == NULL) {
             goto exit;
         }
@@ -308,15 +322,16 @@ static void toTexture(unsigned char* data, int len, int w, int h, int keyframe)
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
     exit:
+//    if(jBuf && _setJvmToCodec) {
+//        env->DeleteLocalRef(jBuf);
+//    }
     if(_needDetach) {
         _javaVM->DetachCurrentThread();
-    }
-    if(jBuf && _setJvmToCodec) {
-        env->DeleteLocalRef(jBuf);
     }
 }
 static void initRender()
 {
+    LogDebug("enter initRender");
     JNIEnv *env = 0;
     int envStat = 0;
     bool needDetach = false;
@@ -352,9 +367,10 @@ static void initRender()
 static int _hasDataFrame = 0;
 static MetaData _metaData;
 static uint32_t _curVideoTimestamp = 0;
+static uint8_t  _curVideoAbsTimestamp = 1;
 static uint32_t _orgVideoTimestamp = 0;
 static uint8_t _orgVideoAbsTimestamp = 1;
-static uint8_t  _curVideoAbsTimestamp = 1;
+static uint32_t _lastAudioTimestamp = 0;
 static u_long _lastTime = 0;
 static long _delayTime = 0;
 static int _fpsUnit = 0;
@@ -371,12 +387,24 @@ static void cleanQueue()
 }
 static void encodeFunc(vbyte8_ptr data, vint32_t len, vint64_t pts, vint64_t dts, void* user_data)
 {
+	//    int ret = 0;
+//    if(_texFile != NULL) {
+//        ret = fwrite(data, len, 1, _texFile);
+//        if (ret != 1) {
+//            LogError("write file failed");
+//        } else {
+//            fflush(_texFile);
+//        }
+//    }
+//    return;
+
     if(_curVideoAbsTimestamp == 1) {
         _curVideoTimestamp = 0;
     } else {
         _curVideoTimestamp += _fpsUnit;
     }
     _delayTime = getTimeStamp() - _lastTime;
+    _lastTime = getTimeStamp();
     LogDebug("_videoTimestamp=%d, timeunit=%d, _delayTime=%d",  _curVideoTimestamp, _fpsUnit, _delayTime);
     bool hasSendVideo = false;
     while(_queueData.size() > 0) {
@@ -401,7 +429,7 @@ static void encodeFunc(vbyte8_ptr data, vint32_t len, vint64_t pts, vint64_t dts
         sendX264VideoData(_rtmpClient, reinterpret_cast<const char *>(data), len, _curVideoTimestamp, _curVideoAbsTimestamp);
     }
     _curVideoAbsTimestamp = 0;
-    _lastTime = getTimeStamp();
+
 }
 /*
  * 解码后回调的函数，RGBA格式
@@ -416,29 +444,42 @@ static void decodeFunc(unsigned char* data, int len, int width, int height, int 
     } else {
         encoder_from_rgba(_encodec, (vbyte8_ptr) data, len, width, height, keyframe);
     }
-//    int ret = 0;
-//    if(_texFile != NULL) {
-//        ret = fwrite(data, len, 1, _texFile);
-//        if (ret != 1) {
-//            LogError("write file failed");
-//        } else {
-//            fflush(_texFile);
-//        }
-//    }
-//    return;
-//    encoder_from_rgba(_encodec, (vbyte8_ptr) data, len, width, height, keyframe);
+
 }
 
 static void rtmpBeginPublish(void* user_data)
 {
+    LogDebug("enter rtmpBeginPublish");
+
     _hasDataFrame = 0;
     _curVideoTimestamp = 0;
     _curVideoAbsTimestamp = 1;
     _orgVideoTimestamp = 0;
     _orgVideoAbsTimestamp = 1;
+    _lastTime = 0;
     beforeSendData(_rtmpClient);
     cleanQueue();
     initRender();
+    if(_decodec != 0) {
+        release_video_codec(_decodec);
+        _decodec = 0;
+    }
+    if(_encodec != 0) {
+        release_video_codec(_encodec);
+        _encodec = 0;
+    }
+    _decodec = create_video_codec((VideoFmt)VIDEO_MEDIA_CODEC, (CodecType)VIDEO_DECODE_TYPE, _width, _height, 0, 0);
+    if (_decodec == 0) {
+        LogError("create_video_codec, decoder failed");
+        return;
+    }
+    set_video_decode_callback(_decodec, decodeFunc, 0);
+    _encodec = create_video_codec((VideoFmt)VIDEO_MEDIA_CODEC, (CodecType)VIDEO_ENCODE_TYPE, 0, 0, 0, 0);
+    if (_encodec == 0) {
+        LogError("create_video_codec, encoder failed");
+        return;
+    }
+    set_video_encode_callback(_encodec, encodeFunc, 0);
 }
 /*
  * rtmp server 接收到视频后的回调，格式H264
@@ -455,7 +496,8 @@ static void rtmpVideoReceiv(const char *data, int size, unsigned long timestamp,
         if(dataSize > 0) {
             getRtmpDataFrame(&_metaData);
             if(_rtmpClient) {
-                setMetaData(_rtmpClient, frameData, dataSize);
+            	setMetaData(_rtmpClient, frameData, dataSize);
+                setDataFrame(_rtmpClient, _metaData.duration, _width, _height, _metaData.fps, _metaData.encoder, _metaData.audioid, _metaData.audioVolume);
             }
         }
         _lastTime = getTimeStamp();
@@ -516,14 +558,16 @@ JNIEXPORT void JNI_OnUnload(JavaVM *jvm, void *reserved) {
 /*
  * Class:     com_medialib_jni_MediaJni
  * Method:    setParams
- * Signature: (III;Lava/lang/string;)V
+ * Signature: (III;Lava/lang/string;II)V
  */
 extern "C" JNIEXPORT void JNICALL Java_com_medialib_jni_MediaJni_setParams
-        (JNIEnv *env, jobject, int use_sdk, int enable_codec,int local_port, jstring url)
+        (JNIEnv *env, jobject, int use_sdk, int enable_codec,int local_port, jstring url,int w, int h)
 {
     _useSdk = use_sdk;
     _enableCodec = enable_codec;
     _localPort = local_port;
+    _width = w;
+    _height = h;
     char* curl = js2c(env, url);
     snprintf(_remoteUrl, sizeof(_remoteUrl), "%s", curl);
 }
@@ -535,6 +579,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_medialib_jni_MediaJni_setParams
 extern "C" JNIEXPORT jint JNICALL Java_com_medialib_jni_MediaJni_openMediaServer
         (JNIEnv *env, jobject jthe, jstring path, jobject callBack)
 {
+    LogDebug("enter openMediaServer");
     int ret = 0;
     RTMP_REQUEST *request = NULL;
     char* cPath = js2c(env, path);
@@ -545,7 +590,7 @@ extern "C" JNIEXPORT jint JNICALL Java_com_medialib_jni_MediaJni_openMediaServer
         LogError("codec_init failed");
         return ret;
     }
-    _decodec = create_video_codec((VideoFmt)VIDEO_MEDIA_CODEC, (CodecType)VIDEO_DECODE_TYPE, 0, 0, 0, 0);
+    _decodec = create_video_codec((VideoFmt)VIDEO_MEDIA_CODEC, (CodecType)VIDEO_DECODE_TYPE, _width, _height, 0, 0);
     if (_decodec == 0) {
         LogError("create_video_codec, decoder failed");
         goto error;
@@ -582,7 +627,7 @@ extern "C" JNIEXPORT jint JNICALL Java_com_medialib_jni_MediaJni_openMediaServer
     }
     _jcallBack = (*env).NewGlobalRef(callBack);
     char name[255];
-    sprintf(name, "%sdst.yuv", _modulePath);
+    sprintf(name, "%sdst.264", _modulePath);
     _texFile = fopen(name, "wb");
     return 0;
 error:
@@ -622,6 +667,10 @@ extern "C" JNIEXPORT void JNICALL Java_com_medialib_jni_MediaJni_closeMediaServe
     if(_decodec != 0) {
         release_video_codec(_decodec);
         _decodec = 0;
+    }
+    if(_encodec != 0) {
+        release_video_codec(_encodec);
+        _encodec = 0;
     }
     if(_rtmpServer != NULL) {
         closeRtmpServer(_rtmpServer);

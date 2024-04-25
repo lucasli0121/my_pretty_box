@@ -4,12 +4,17 @@ import android.content.Context
 import com.media.demo.util.AssetFile
 import org.json.JSONObject
 import java.io.Serializable
+import kotlin.math.max
 
 class BoxConf : Serializable {
     var rtmpLocalPort: Int = 1935
     var rtmpRemoteUrl: String = "rtmp://192.168.1.103:1935/live/test"
     var useSdk: Int = 1
     var enableDecode: Int = 1
+    var width: Int = 0
+    var height: Int = 0
+    var minFaceSize: Int = 30
+    var maxFaceSize: Int = 60
     var skinWhiting: Int = 8
     var skinSmooth: Int = 8
     var brightness: Int = 50
@@ -34,6 +39,10 @@ class BoxConf : Serializable {
                 rtmpRemoteUrl = jsObj.getString("rtmp_remote_url")
                 useSdk = jsObj.getInt("use_sdk")
                 enableDecode = jsObj.getInt("enable_decode")
+                width = jsObj.getInt("width")
+                height = jsObj.getInt("height")
+                minFaceSize = jsObj.getInt("min_face_size")
+                maxFaceSize = jsObj.getInt("max_face_size")
                 skinWhiting = jsObj.getInt("skin_whiting")
                 skinSmooth = jsObj.getInt("skin_smooth")
                 brightness = jsObj.getInt("brightness")

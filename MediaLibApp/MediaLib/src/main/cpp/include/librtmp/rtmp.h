@@ -213,8 +213,8 @@ extern "C"
     int m_inChunkSize;
     int m_outChunkSize;
     int m_nBWCheckCounter;
-    int m_nBytesIn;
-    int m_nBytesInSent;
+    uint32_t m_nBytesIn;
+    uint32_t m_nBytesInSent;
     int m_nBufferMS;
     int m_stream_id;		/* returned in _result from createStream */
     int m_mediaChannel;
@@ -283,6 +283,7 @@ extern "C"
   int RTMP_Connect(RTMP *r, RTMPPacket *cp);
   struct sockaddr;
   int RTMP_Connect0(RTMP *r, struct sockaddr *svc);
+  int RTMP_ConnectWithEth(RTMP *r, struct sockaddr *svc, const char *eth);
   int RTMP_Connect1(RTMP *r, RTMPPacket *cp);
   int RTMP_Serve(RTMP *r);
 

@@ -93,6 +93,10 @@ dependencies {
     implementation(Libs.Http.okHttp3)
     implementation(Libs.Http.okHttpLogging)
     implementation(Libs.Http.asyncHttp)
+    implementation 'com.iceteck.silicompressorr:silicompressor:2.2.3'
+    implementation ('com.googlecode.mp4parser:isoparser:1.0.6') {
+        exclude group: 'org.aspectj', module: 'aspectjrt'
+    }
     implementation('com.github.humorousz:FrameSequenceDrawable:1.0.1-SNAPSHOT')
 
     implementation project(':MediaLib')

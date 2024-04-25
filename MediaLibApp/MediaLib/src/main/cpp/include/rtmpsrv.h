@@ -46,6 +46,8 @@ typedef struct
   int width;
   int height;
   int fps;
+  char audioid[32];
+  int audioVolume;
 } MetaData;
 
 RTMP_SERVER* openRtmpServer(RTMP_REQUEST *rtmpRequest);

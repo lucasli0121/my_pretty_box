@@ -35,6 +35,7 @@
 #else /* !_XBOX */
 #include <winsock2.h>
 #include <ws2tcpip.h>
+#include <iphlpapi.h>
 #endif
 
 #define GetSockError()	WSAGetLastError()
@@ -59,6 +60,8 @@
 #include <string.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
+#include <net/if.h>
+#include <net/if_arp.h>
 #define GetSockError()	errno
 #define SetSockError(e)	errno = e
 #undef closesocket

@@ -43,5 +43,5 @@ int sendX264VideoData(RTMP_CLIENT *rtmp, const char *data, int size, unsigned in
 int sendRawVideoData(RTMP_CLIENT *rtmp, const char *data, int size, unsigned int timestamp, int absTimestamp);
 int sendAudioData(RTMP_CLIENT *rtmp, const char *data, int size, unsigned int timestamp, int absTimestamp);
 void setMetaData(RTMP_CLIENT *rtmp, char* data, int size);
-// void setDataFrame(RTMP_CLIENT *rtmp, int duration, int width, int height, int fps, char* encoder);
+void setDataFrame(RTMP_CLIENT *rtmp, int duration, int width, int height, int fps, char* encoder, char* audioid, int audiovolume);
 #endif

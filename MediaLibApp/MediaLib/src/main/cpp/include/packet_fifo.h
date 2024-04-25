@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2024-02-16 10:56:46
  * LastEditors: liguoqiang
- * LastEditTime: 2024-02-17 21:28:18
+ * LastEditTime: 2024-04-15 23:16:36
  * Description: 
 ********************************************************************************/
 #ifndef __PACKET_FIFO_H
@@ -15,6 +15,7 @@
 typedef struct PacketFifo
 {
     RTMPPacket *packet;
+    float t;
     PacketFifo *next;
 } PacketFifo;
 
@@ -27,7 +28,7 @@ typedef struct FifoAgent {
     void(*uninitFifo)(FifoAgent*);
     void(*pushFifo)(FifoAgent*, RTMPPacket*);
     RTMPPacket*(*frontFifo)(FifoAgent*);
-    void(*popFifo)(FifoAgent*);
+    float(*popFifo)(FifoAgent*);
     void(*clearFifo)(FifoAgent*);
 } FifoAgent;
 

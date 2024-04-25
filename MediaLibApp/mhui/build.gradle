@@ -45,7 +45,7 @@ dependencies {
     implementation Libs.AndroidX.recyclerview
 
     implementation "com.alibaba:fastjson:1.1.70.android"
-    implementation "com.github.bumptech.glide:glide:4.9.0"
+    implementation "com.github.bumptech.glide:glide:4.16.0"
     implementation 'com.lzy.net:okgo:3.0.4'
 
 //    implementation(name:'MHSDK-4.2.1', ext:'aar')

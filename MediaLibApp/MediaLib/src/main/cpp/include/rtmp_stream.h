@@ -9,7 +9,7 @@
  * Author: liguoqiang
  * Date: 2023-12-23 23:32:02
  * LastEditors: liguoqiang
- * LastEditTime: 2024-02-14 10:29:53
+ * LastEditTime: 2024-04-23 22:39:56
  * Description: 
 ********************************************************************************/
 #ifndef __RTMP_SRV_PROTO_H__
@@ -65,6 +65,8 @@ typedef struct
   int height;
   int framerate;
   char encoder[64];
+  char audioid[32];
+  int audioVolume;
   char* dataFrameBuf;
   int dataFrameSize;
 } RTMP_STREAM;

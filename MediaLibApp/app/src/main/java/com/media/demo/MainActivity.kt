@@ -13,6 +13,7 @@ import com.media.demo.util.AssetFile
 import com.media.demo.util.PermissionsUtils
 import com.medialib.jni.MediaJni
 import com.meihu.beauty.bean.MeiYanBean
+import com.meihu.beauty.bean.MeiYanTypeBean
 import com.meihu.beauty.bean.TeXiaoWaterBean
 import com.meihu.beauty.utils.MhDataManager
 import com.meihu.beautylibrary.MHSDK
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             Log.e("MainActivity", "init json config failed")
             finish()
         }
-        mediaJni.setParams(boxCfg.useSdk, boxCfg.enableDecode, boxCfg.rtmpLocalPort, boxCfg.rtmpRemoteUrl)
+        mediaJni.setParams(boxCfg.useSdk, boxCfg.enableDecode, boxCfg.rtmpLocalPort, boxCfg.rtmpRemoteUrl, boxCfg.width, boxCfg.height)
         mhManagerInit()
         var glSurface = findViewById<SurfaceView>(R.id.gl_surface)
         glSurface.holder.addCallback(object: SurfaceHolder.Callback {
@@ -205,6 +206,34 @@ class MainActivity : AppCompatActivity() {
             MHConfigConstants.MEI_YAN_MEI_XING_FUNCION
         ) as ArrayList<MHCommonBean>
 
+
+//        var beansTx: MutableList<MHCommonBean> = java.util.ArrayList()
+//        beansTx.add(MeiYanTypeBean(R.string.beauty_mh_003, MHConfigConstants.TE_XIAO_FUNCTION))
+//        beansTx.add(
+//            MeiYanTypeBean(
+//                R.string.beauty_mh_014,
+//                MHConfigConstants.TE_XIAO_SHUI_YIN_FUNCTION
+//            )
+//        )
+//        beansTx.add(
+//            MeiYanTypeBean(
+//                R.string.beauty_mh_015,
+//                MHConfigConstants.TE_XIAO_DONG_ZUO_FUNCTION
+//            )
+//        )
+//        beansTx.add(
+//            MeiYanTypeBean(
+//                R.string.beauty_mh_004,
+//                MHConfigConstants.TE_XIAO_HA_HA_JING_FUNCTION
+//            )
+//        )
+//        val meiYanTypeBean = beansTx[0] as MeiYanTypeBean
+//        meiYanTypeBean.isChecked = true
+//
+//        beansTx = MHSDK.getFunctions(beansTx, MHConfigConstants.TE_XIAO)
+
+        mhManager?.setMinFaceSize(boxCfg.minFaceSize)
+        mhManager?.setMaxFace(boxCfg.maxFaceSize)
         mhManager?.setSkinWhiting(boxCfg.skinWhiting)
         mhManager?.setSkinSmooth(boxCfg.skinSmooth)
         mhManager?.setBrightness(boxCfg.brightness)

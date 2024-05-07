@@ -50,7 +50,7 @@ typedef struct
   int audioVolume;
 } MetaData;
 
-RTMP_SERVER* openRtmpServer(RTMP_REQUEST *rtmpRequest);
+RTMP_SERVER* openRtmpServer(RTMP_REQUEST *rtmpRequest, const char *logFileName);
 RTMP_REQUEST *getDefaultRtmpRequest();
 void closeRtmpServer(RTMP_SERVER *rtmpServer);
 void setRtmpVideoCallback(VideoCallbackFunc videoFunc, void *user_data);

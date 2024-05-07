@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2023-12-22 15:13:59
  * LastEditors: liguoqiang
- * LastEditTime: 2024-01-12 20:14:16
+ * LastEditTime: 2024-05-03 23:31:56
  * Description: 
 ********************************************************************************/
 /*  Thread compatibility glue
@@ -32,6 +32,7 @@
 #ifdef WIN32
 #include <windows.h>
 #include <process.h>
+//#include <sys/cpuset.h>
 #define TFTYPE	void
 #define TFRET()
 #define THANDLE	HANDLE
@@ -39,13 +40,13 @@ typedef CRITICAL_SECTION   thread_mutex_t;   //win32 mutex
 #else
 #include <pthread.h>
 #include <unistd.h>
+#define _GNU_SOURCE
+#include <sched.h>
 #define TFTYPE	void *
 #define TFRET()	0
 #define THANDLE pthread_t
 typedef pthread_mutex_t    thread_mutex_t;
 #endif
-
-
 
 
 typedef TFTYPE (thrfunc)(void *arg);
@@ -63,6 +64,7 @@ typedef struct RtmpMutex {
 RtmpMutex *createMutex();
 void destroyMutex(RtmpMutex *mutex);
 
+void bindToCpu(int cpu);
 
 
 

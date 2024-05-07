@@ -10,10 +10,10 @@ public class MediaJni {
     static {
         try {
             System.loadLibrary("c++_shared");
-//            System.loadLibrary("yuv");
             System.loadLibrary("x264");
-            System.loadLibrary("mycodec");
+            System.loadLibrary("yuv");
             System.loadLibrary("rtmpsvr");
+            System.loadLibrary("mycodec");
             System.loadLibrary("MediaJni");
         } catch(UnsatisfiedLinkError e) {
             System.err.println("Native code library failed to load.\n" + e.getMessage() + " " + e.getCause());

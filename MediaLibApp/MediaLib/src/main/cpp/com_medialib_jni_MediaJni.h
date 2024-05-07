@@ -12,7 +12,7 @@ extern "C" {
 /*
  * Class:     com_medialib_jni_MediaJni
  * Method:    setParams
- * Signature: (III;Lava/lang/string;II)V
+ * Signature: (III;Ljava/lang/string;II)V
  */
 JNIEXPORT void JNICALL Java_com_medialib_jni_MediaJni_setParams
         (JNIEnv *, jobject, int use_sdk, int enable_codec, int local_port, jstring url, int w, int h);

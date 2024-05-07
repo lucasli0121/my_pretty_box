@@ -9,7 +9,7 @@
  * Author: liguoqiang
  * Date: 2023-12-23 23:32:02
  * LastEditors: liguoqiang
- * LastEditTime: 2024-04-23 22:39:56
+ * LastEditTime: 2024-04-26 08:53:45
  * Description: 
 ********************************************************************************/
 #ifndef __RTMP_SRV_PROTO_H__
@@ -73,6 +73,7 @@ typedef struct
 RTMP_STREAM* initRtmpStream(int chunkSize, int needRawVideo);
 int openRtmpStreaming(RTMP_STREAM*, int sockfd );
 void closeRtmpStreaming(RTMP_STREAM *rtmpStream);
+int streamIsConnect(RTMP_STREAM *rtmpStream);
 
 #ifdef __cplusplus
 }

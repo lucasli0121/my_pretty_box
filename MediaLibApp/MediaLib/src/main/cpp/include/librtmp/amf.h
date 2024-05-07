@@ -26,6 +26,7 @@
  */
 
 #include <stdint.h>
+#include "log.h"
 
 #ifndef TRUE
 #define TRUE	1
@@ -103,14 +104,12 @@ extern "C"
   int AMF_DecodeBoolean(const char *data);
   double AMF_DecodeNumber(const char *data);
 
-  char *AMF_Encode(AMFObject * obj, char *pBuffer, char *pBufEnd);
-  int AMF_Decode(AMFObject * obj, const char *pBuffer, int nSize,
-		 int bDecodeName);
-  int AMF_DecodeArray(AMFObject * obj, const char *pBuffer, int nSize,
+  char *AMF_Encode(RTMP_LogContext* logCtx, AMFObject * obj, char *pBuffer, char *pBufEnd);
+  int AMF_Decode(RTMP_LogContext*, AMFObject * obj, const char *pBuffer, int nSize, int bDecodeName);
+  int AMF_DecodeArray(RTMP_LogContext* logCtx, AMFObject * obj, const char *pBuffer, int nSize,
 		      int nArrayLen, int bDecodeName);
-  int AMF3_Decode(AMFObject * obj, const char *pBuffer, int nSize,
-		  int bDecodeName);
-  void AMF_Dump(AMFObject * obj);
+  int AMF3_Decode(RTMP_LogContext* logCtx, AMFObject * obj, const char *pBuffer, int nSize, int bDecodeName);
+  void AMF_Dump(RTMP_LogContext*, AMFObject * obj);
   void AMF_Reset(AMFObject * obj);
 
   void AMF_AddProp(AMFObject * obj, const AMFObjectProperty * prop);
@@ -133,13 +132,13 @@ extern "C"
 
   int AMFProp_IsValid(AMFObjectProperty * prop);
 
-  char *AMFProp_Encode(AMFObjectProperty * prop, char *pBuffer, char *pBufEnd);
-  int AMF3Prop_Decode(AMFObjectProperty * prop, const char *pBuffer,
+  char *AMFProp_Encode(RTMP_LogContext* logCtx, AMFObjectProperty * prop, char *pBuffer, char *pBufEnd);
+  int AMF3Prop_Decode(RTMP_LogContext* logCtx, AMFObjectProperty * prop, const char *pBuffer,
 		      int nSize, int bDecodeName);
-  int AMFProp_Decode(AMFObjectProperty * prop, const char *pBuffer,
+  int AMFProp_Decode(RTMP_LogContext* logCtx, AMFObjectProperty * prop, const char *pBuffer,
 		     int nSize, int bDecodeName);
 
-  void AMFProp_Dump(AMFObjectProperty * prop);
+  void AMFProp_Dump(RTMP_LogContext* logCtx, AMFObjectProperty * prop);
   void AMFProp_Reset(AMFObjectProperty * prop);
 
   typedef struct AMF3ClassDef

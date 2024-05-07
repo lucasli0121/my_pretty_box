@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2023-12-22 15:14:00
  * LastEditors: liguoqiang
- * LastEditTime: 2024-02-12 11:58:20
+ * LastEditTime: 2024-05-04 19:41:25
  * Description: 
 ********************************************************************************/
 /*
@@ -34,6 +34,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdint.h>
+#include "../thread.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -50,18 +51,28 @@ typedef enum
   RTMP_LOGDEBUG, RTMP_LOGDEBUG2, RTMP_LOGALL
 } RTMP_LogLevel;
 
-typedef void (RTMP_LogCallback)(int level, const char *fmt, va_list);
+struct RTMP_LogContext;
+typedef void (RTMP_LogCallback)(RTMP_LogContext *ctx, int level, const char *fmt, va_list);
 
-void RTMP_LogInit(void);
-void RTMP_LogUninit(void);
-void RTMP_LogSetCallback(RTMP_LogCallback *cb);
-void RTMP_LogSetOutput(FILE *file);
+RTMP_LogContext* RTMP_LogInit(void);
+void RTMP_LogUninit(RTMP_LogContext* context);
+void RTMP_LogSetCallback(RTMP_LogContext* r, RTMP_LogCallback *cb);
+void RTMP_LogSetOutput(RTMP_LogContext* r, FILE *file);
 void RTMP_LogPrintf(const char *format, ...);
-void RTMP_Log(int level, const char *format, ...);
-void RTMP_LogHex(int level, const uint8_t *data, unsigned long len);
-void RTMP_LogHexString(int level, const uint8_t *data, unsigned long len);
-void RTMP_LogSetLevel(RTMP_LogLevel lvl);
-RTMP_LogLevel RTMP_LogGetLevel(void);
+void RTMP_Log(RTMP_LogContext* r, int level, const char *format, ...);
+void RTMP_LogHex(RTMP_LogContext* r, int level, const uint8_t *data, unsigned long len);
+void RTMP_LogHexString(RTMP_LogContext* r,int level, const uint8_t *data, unsigned long len);
+void RTMP_LogSetLevel(RTMP_LogContext* r,RTMP_LogLevel lvl);
+RTMP_LogLevel RTMP_LogGetLevel(RTMP_LogContext* r);
+
+typedef struct RTMP_LogContext
+{
+    RTMP_LogLevel level;
+    RTMP_LogCallback *cb;
+    FILE *file;
+    RtmpMutex *mutex;
+
+} RTMP_LogContext;
 
 #ifdef __cplusplus
 }

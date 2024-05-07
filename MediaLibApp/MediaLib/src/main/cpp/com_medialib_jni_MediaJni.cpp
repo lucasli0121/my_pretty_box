@@ -387,7 +387,7 @@ static void cleanQueue()
 }
 static void encodeFunc(vbyte8_ptr data, vint32_t len, vint64_t pts, vint64_t dts, void* user_data)
 {
-	//    int ret = 0;
+//	    int ret = 0;
 //    if(_texFile != NULL) {
 //        ret = fwrite(data, len, 1, _texFile);
 //        if (ret != 1) {
@@ -558,7 +558,7 @@ JNIEXPORT void JNI_OnUnload(JavaVM *jvm, void *reserved) {
 /*
  * Class:     com_medialib_jni_MediaJni
  * Method:    setParams
- * Signature: (III;Lava/lang/string;II)V
+ * Signature: (III;Ljava/lang/string;II)V
  */
 extern "C" JNIEXPORT void JNICALL Java_com_medialib_jni_MediaJni_setParams
         (JNIEnv *env, jobject, int use_sdk, int enable_codec,int local_port, jstring url,int w, int h)
@@ -613,7 +613,8 @@ extern "C" JNIEXPORT jint JNICALL Java_com_medialib_jni_MediaJni_openMediaServer
     }
     request = getDefaultRtmpRequest();
     request->rtmpport = _localPort;
-    _rtmpServer = openRtmpServer(request);
+    sprintf(rtmpLog, "%srtmpsvr.log", _modulePath);
+    _rtmpServer = openRtmpServer(request, rtmpLog);
     if(_rtmpServer == NULL) {
         LogError("openRtmpServer failed, rtmpport=%d", request->rtmpport);
         goto error;

@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2021-06-15 17:16:24
  * LastEditors: liguoqiang
- * LastEditTime: 2024-02-07 10:51:35
+ * LastEditTime: 2024-03-09 11:46:58
  * Description: 
 ********************************************************************************/
 /*
@@ -39,7 +39,6 @@ public:
 	void test_hw_decode(const_char_ptr filename, const_char_ptr outfilename);
 
 	void set_video_size(int w, int h);
-	void set_sps_pps(vbyte8_ptr sps, vint32_t spslen, vbyte8_ptr pps, vint32_t ppslen);
 	
 	vint32_t encoder_from_rgba(vbyte8_ptr srcdata, vint32_t srclen, vint32_t width, vint32_t height, vint32_t keyframe);
 	/*encoder video source format is yuv420p*/
@@ -68,6 +67,7 @@ private:
 	void close_codec();
 	int create_encoder();
 	int create_decoder();
+	int rebuild_264_decoder();
 	int encode_video_common_func(
 		vbyte8_ptr srcdata,
 		vint32_t srclen,
@@ -83,7 +83,12 @@ private:
 	vint32_t convert_diff_fmt(AVFrame* srcframe, AVPixelFormat srcFmt, int srcw, int srch, AVPixelFormat destFmt, int dstw, int dsth, vbyte8_ptr *dest);
 	int convert_fmt_with_ff(AVFrame* src, int srcw, int srch, AVPixelFormat srcfmt, int dstw, int dsth, AVPixelFormat dstfmt, vbyte8_ptr*dest);
 	int convert_fmt_with_libyuv(AVFrame* src, int srcw, int srch, AVPixelFormat srcfmt, int dstw, int dsth, AVPixelFormat dstfmt, vbyte8_ptr*dest);
+	int scale_video_common_func(AVFrame* srcframe, AVPixelFormat fmt, int destw, int desth, AVFrame** destframe);
+	int scale_yuv420p(AVFrame* srcframe, int destw, int desth, AVFrame** destframe);
+	int scale_nv12(AVFrame* srcframe, int destw, int desth, AVFrame** destframe);
 	vbyte8_ptr get_av_buffer(int size);
+	vbyte8_ptr get_scale_buffer(int size);
+	vbyte8_ptr get_scale_buffer2(int size);
 	int hw_coder_init(AVCodecContext *ctx, const enum AVHWDeviceType type);
 	void find_hw_pix_fmt();
 	int decode_write_file(FILE* output_file, AVCodecContext* avctx, AVPacket* packet);
@@ -96,8 +101,11 @@ private:
 	AVFrame *_av_frame;
 	const AVCodec * _av_codec;
 	vbyte8_ptr _av_buffer;
+	vint32_t _av_buffer_size;
 	vbyte8_ptr _scale_buffer;
 	vint32_t _scale_size;
+	vbyte8_ptr _scale_buffer2;
+	vint32_t _scale_size2;
 	bool _has_open;
 	vint32_t _frame_interval;
 	AVBufferRef * _hw_device_ctx;

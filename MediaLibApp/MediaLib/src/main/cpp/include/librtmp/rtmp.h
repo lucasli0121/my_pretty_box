@@ -34,6 +34,7 @@
 #include <stddef.h>
 
 #include "amf.h"
+#include "log.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -115,7 +116,6 @@ extern "C"
   } RTMPSockBuf;
 
   void RTMPPacket_Reset(RTMPPacket *p);
-  void RTMPPacket_Dump(RTMPPacket *p);
   int RTMPPacket_Alloc(RTMPPacket *p, int nSize);
   void RTMPPacket_Free(RTMPPacket *p);
 
@@ -252,9 +252,10 @@ extern "C"
     RTMPPacket m_write;
     RTMPSockBuf m_sb;
     RTMP_LNK Link;
+    RTMP_LogContext* logCtx;
   } RTMP;
 
-  int RTMP_ParseURL(const char *url, int *protocol, AVal *host,
+  int RTMP_ParseURL(RTMP_LogContext* logCtx, const char *url, int *protocol, AVal *host,
 		     unsigned int *port, AVal *playpath, AVal *app);
 
   void RTMP_ParsePlaypath(AVal *in, AVal *out);
@@ -325,7 +326,7 @@ extern "C"
   int RTMP_FindFirstMatchingProperty(AMFObject *obj, const AVal *name,
 				      AMFObjectProperty * p);
 
-  int RTMPSockBuf_Fill(RTMPSockBuf *sb);
+  int RTMPSockBuf_Fill(RTMP_LogContext* r, RTMPSockBuf *sb);
   int RTMPSockBuf_Send(RTMPSockBuf *sb, const char *buf, int len);
   int RTMPSockBuf_Close(RTMPSockBuf *sb);
 
@@ -338,8 +339,7 @@ extern "C"
   int RTMP_Write(RTMP *r, const char *buf, int size);
 
 /* hashswf.c */
-  int RTMP_HashSWF(const char *url, unsigned int *size, unsigned char *hash,
-		   int age);
+  int RTMP_HashSWF(RTMP_LogContext*, const char *url, unsigned int *size, unsigned char *hash, int age);
 
 #ifdef __cplusplus
 };

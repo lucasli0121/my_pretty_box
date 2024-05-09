@@ -13,6 +13,7 @@ class BoxConf : Serializable {
     var enableDecode: Int = 1
     var width: Int = 0
     var height: Int = 0
+    var chunkSize: Int = 128
     var minFaceSize: Int = 30
     var maxFaceSize: Int = 60
     var skinWhiting: Int = 8
@@ -39,6 +40,7 @@ class BoxConf : Serializable {
                 rtmpRemoteUrl = jsObj.getString("rtmp_remote_url")
                 useSdk = jsObj.getInt("use_sdk")
                 enableDecode = jsObj.getInt("enable_decode")
+                chunkSize = jsObj.getInt("chunk_size")
                 width = jsObj.getInt("width")
                 height = jsObj.getInt("height")
                 minFaceSize = jsObj.getInt("min_face_size")

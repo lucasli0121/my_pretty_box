@@ -26,7 +26,7 @@ public class MediaJni {
         void onRenderInit();
     }
 
-    public native void setParams(int useSdk, int enableCodec, int localPort, String remoteUrl, int w, int h);
+    public native void setParams(int useSdk, int enableCodec, int localPort, String remoteUrl, int w, int h, int chunkSize);
     public native int openMediaServer(String logfile, IDecodeListener listener);
     public native void closeMediaServer();
     public native void testMediaCodec(String inputFile, String outputFile);

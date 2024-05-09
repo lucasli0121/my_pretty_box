@@ -1,6 +1,7 @@
 {
   "rtmp_local_port": 1935,
   "rtmp_remote_url": "rtmp://push.ecloudai.com/live/test_lgq",
+  "chunk_size":4096,
   "width": 640,
   "height": 480,
   "use_sdk": 1,

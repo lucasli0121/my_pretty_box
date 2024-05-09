@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             Log.e("MainActivity", "init json config failed")
             finish()
         }
-        mediaJni.setParams(boxCfg.useSdk, boxCfg.enableDecode, boxCfg.rtmpLocalPort, boxCfg.rtmpRemoteUrl, boxCfg.width, boxCfg.height)
+        mediaJni.setParams(boxCfg.useSdk, boxCfg.enableDecode, boxCfg.rtmpLocalPort, boxCfg.rtmpRemoteUrl, boxCfg.width, boxCfg.height, boxCfg.chunkSize)
         mhManagerInit()
         var glSurface = findViewById<SurfaceView>(R.id.gl_surface)
         glSurface.holder.addCallback(object: SurfaceHolder.Callback {

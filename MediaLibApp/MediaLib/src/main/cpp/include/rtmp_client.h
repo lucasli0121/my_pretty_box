@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2024-01-16 10:04:05
  * LastEditors: liguoqiang
- * LastEditTime: 2024-02-20 13:50:17
+ * LastEditTime: 2024-05-08 09:25:13
  * Description: 
 ********************************************************************************/
 #ifndef __RTMP_CLIENT_H__
@@ -44,4 +44,5 @@ int sendRawVideoData(RTMP_CLIENT *rtmp, const char *data, int size, unsigned int
 int sendAudioData(RTMP_CLIENT *rtmp, const char *data, int size, unsigned int timestamp, int absTimestamp);
 void setMetaData(RTMP_CLIENT *rtmp, char* data, int size);
 void setDataFrame(RTMP_CLIENT *rtmp, int duration, int width, int height, int fps, char* encoder, char* audioid, int audiovolume);
+void changeChunkSize(RTMP_CLIENT *client, int size);
 #endif

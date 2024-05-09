@@ -43,6 +43,7 @@ static int _localPort = 1935;
 static char _remoteUrl[255];
 static int _width = 0;
 static int _height = 0;
+static int _chunkSize = 128;
 typedef enum {
     VIDEO_DATA = 0,
     AUDIO_DATA = 1
@@ -558,16 +559,17 @@ JNIEXPORT void JNI_OnUnload(JavaVM *jvm, void *reserved) {
 /*
  * Class:     com_medialib_jni_MediaJni
  * Method:    setParams
- * Signature: (III;Ljava/lang/string;II)V
+ * Signature: (III;Ljava/lang/string;III)V
  */
 extern "C" JNIEXPORT void JNICALL Java_com_medialib_jni_MediaJni_setParams
-        (JNIEnv *env, jobject, int use_sdk, int enable_codec,int local_port, jstring url,int w, int h)
+        (JNIEnv *env, jobject, int use_sdk, int enable_codec,int local_port, jstring url,int w, int h, int chunkSize)
 {
     _useSdk = use_sdk;
     _enableCodec = enable_codec;
     _localPort = local_port;
     _width = w;
     _height = h;
+    _chunkSize = chunkSize;
     char* curl = js2c(env, url);
     snprintf(_remoteUrl, sizeof(_remoteUrl), "%s", curl);
 }
@@ -611,6 +613,7 @@ extern "C" JNIEXPORT jint JNICALL Java_com_medialib_jni_MediaJni_openMediaServer
         LogError("startRtmpClient failed, rtmp server ip=%s", _remoteUrl);
         goto error;
     }
+    changeChunkSize(_rtmpClient, _chunkSize);
     request = getDefaultRtmpRequest();
     request->rtmpport = _localPort;
     sprintf(rtmpLog, "%srtmpsvr.log", _modulePath);

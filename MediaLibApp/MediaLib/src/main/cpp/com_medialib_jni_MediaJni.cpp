@@ -260,6 +260,8 @@ static void releaseTextureIds()
 }
 static void toTexture(unsigned char* data, int len, int w, int h, int keyframe)
 {
+    LogDebug("toTexture, len=%d, w=%d, h=%d", len, w, h);
+
     if(initEGLContext() == -1) {
         return;
     }
@@ -386,7 +388,7 @@ static void cleanQueue()
     }
     _queueMutex.unlock();
 }
-static void encodeFunc(vbyte8_ptr data, vint32_t len, vint64_t pts, vint64_t dts, void* user_data)
+static void encodeFunc(vbyte8_ptr data, vint32_t len, vint64_t pts, vint64_t dts, vint32_t keyframe, void* user_data)
 {
 //	    int ret = 0;
 //    if(_texFile != NULL) {
@@ -415,7 +417,7 @@ static void encodeFunc(vbyte8_ptr data, vint32_t len, vint64_t pts, vint64_t dts
             if (audioData.timeStamp >= _curVideoTimestamp && !hasSendVideo) {
                 hasSendVideo = true;
                 LogDebug("audio video, videoTimeStamp=%d, curVideoTimestamp=%d, abstimestamp=%d, audiotimestamp=%d", audioData.videoTimeStamp, _curVideoTimestamp, audioData.videoAbsTimeStamp,  audioData.timeStamp);
-                sendX264VideoData(_rtmpClient, reinterpret_cast<const char *>(data), len, _curVideoTimestamp, audioData.videoAbsTimeStamp);
+                sendX264VideoData(_rtmpClient, reinterpret_cast<const char *>(data), len, _curVideoTimestamp, audioData.videoAbsTimeStamp, keyframe);
             }
             sendAudioData(_rtmpClient, reinterpret_cast<const char *>(audioData.data), audioData.size, audioData.timeStamp, audioData.absTimeStamp);
             free(audioData.data);
@@ -427,7 +429,7 @@ static void encodeFunc(vbyte8_ptr data, vint32_t len, vint64_t pts, vint64_t dts
         }
     }
     if(!hasSendVideo) {
-        sendX264VideoData(_rtmpClient, reinterpret_cast<const char *>(data), len, _curVideoTimestamp, _curVideoAbsTimestamp);
+        sendX264VideoData(_rtmpClient, reinterpret_cast<const char *>(data), len, _curVideoTimestamp, _curVideoAbsTimestamp, keyframe);
     }
     _curVideoAbsTimestamp = 0;
 
@@ -509,7 +511,7 @@ static void rtmpVideoReceiv(const char *data, int size, unsigned long timestamp,
     if(_enableCodec) {
         decode_to_rgba(_decodec, (vbyte8_ptr) data, size);
     } else {
-        encodeFunc((vbyte8_ptr) data, size, 0, 0, 0);
+        encodeFunc((vbyte8_ptr) data, size, 0, 0, key, 0);
     }
 }
 static void rtmpAudioReceiv(const char *data, int size, unsigned long timestamp, uint8_t absTimestamp,  void* user_data)

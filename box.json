@@ -4,7 +4,7 @@
   "chunk_size":4096,
   "width": 640,
   "height": 480,
-  "use_sdk": 1,
+  "use_sdk": 0,
   "enable_decode": 1,
   "min_face_size": 30,
   "max_face_size": 60,

@@ -19,10 +19,10 @@ package com.build.config
 object Versions {
     const val compileSdkVersion = 34
     const val buildToolsVersion = "33.0.1"
-    const val minSdkVersion = 26
-    const val targetSdkVersion = 33
-    const val versionCode = 202405080
-    const val versionName = "1.1.11.2"
+    const val minSdkVersion = 29
+    const val targetSdkVersion = 32
+    const val versionCode = 202405173
+    const val versionName = "1.1.11.5"
 
     const val gradleVersion = "8.1.1"
     const val kotlinVersion = "1.9.0"

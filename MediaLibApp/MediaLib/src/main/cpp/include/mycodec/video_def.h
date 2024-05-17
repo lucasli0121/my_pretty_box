@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2021-06-15 17:16:24
  * LastEditors: liguoqiang
- * LastEditTime: 2024-02-08 00:19:29
+ * LastEditTime: 2024-05-17 20:09:36
  * Description: 
 ********************************************************************************/
 #ifndef __VIDEO_DEFINE_H
@@ -33,7 +33,7 @@ typedef enum CodecType
 }CodecType;
 
 typedef void (*DecodeCallbackFunc)(vbyte8_ptr dest, vint32_t destlen, vint32_t w, vint32_t h, vint32_t keyframe, void*);
-typedef void (*EncodeCallbackFunc)(vbyte8_ptr dest, vint32_t destlen, vint64_t pts, vint64_t dts, void*);
+typedef void (*EncodeCallbackFunc)(vbyte8_ptr dest, vint32_t destlen, vint64_t pts, vint64_t dts, vint32_t keyframe, void*);
 
 typedef struct VideoParam
 {

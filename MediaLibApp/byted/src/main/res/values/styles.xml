@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="radiobutton" >
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingTop">1dp</item>
+        <item name="android:paddingBottom">1dp</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:background">@drawable/radio_button_bg_selector</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@color/radio_button_text_selector</item>
+
+    </style>
+
+    <!--设置Tablayout字体大小-->
+    <style name="TabLayoutTextSize">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    <!--设置Tablayout字体加粗-->
+    <style name="TabLayoutTextStyle">
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

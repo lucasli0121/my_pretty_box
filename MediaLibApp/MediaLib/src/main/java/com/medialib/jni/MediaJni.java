@@ -13,6 +13,11 @@ public class MediaJni {
             System.loadLibrary("x264");
             System.loadLibrary("yuv");
             System.loadLibrary("rtmpsvr");
+            System.loadLibrary("avcodec");
+            System.loadLibrary("avdevice");
+            System.loadLibrary("avformat");
+            System.loadLibrary("avutil");
+            System.loadLibrary("swscale");
             System.loadLibrary("mycodec");
             System.loadLibrary("MediaJni");
         } catch(UnsatisfiedLinkError e) {
@@ -21,13 +26,18 @@ public class MediaJni {
     }
 
     public interface IDecodeListener {
+        void onStartServerCallback(int result);
         void onDecodeCallback(byte[] data, int len, int w, int h, int keyFrame);
-        int onRenderTextureId(int textureId1, int textureId2, int textureId3, byte[]data, int w, int h);
+        int onRenderTextureId(int textureId, int len, int w, int h);
+        int onRenderBuffer(byte[]data, int len, int w, int h);
         void onRenderInit();
+        void onRenderStop();
     }
 
     public native void setParams(int useSdk, int enableCodec, int localPort, String remoteUrl, int w, int h, int chunkSize);
     public native int openMediaServer(String logfile, IDecodeListener listener);
     public native void closeMediaServer();
     public native void testMediaCodec(String inputFile, String outputFile);
+    public native void putTestMediaFile(String testFile);
+    public native  void stopTestMedia();
 }

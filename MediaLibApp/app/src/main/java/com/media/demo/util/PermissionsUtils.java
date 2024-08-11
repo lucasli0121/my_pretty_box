@@ -22,10 +22,7 @@ public class PermissionsUtils {
      * @return true：已授权； false：未授权；
      */
     public static boolean checkPermission(Context context, String permission) {
-        if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED)
-            return true;
-        else
-            return false;
+        return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
     }
 
     /**
@@ -73,10 +70,7 @@ public class PermissionsUtils {
      * -----------并在权限请求系统对话框中选择了 Don't ask again 选项，此方法将返回 false。
      */
     public static boolean judgePermission(Context context, String permission) {
-        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, permission))
-            return true;
-        else
-            return false;
+        return ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, permission);
     }
 
     /**
@@ -131,7 +125,7 @@ public class PermissionsUtils {
                     break;
                 }
             }
-            String[] unauthorizedMorePermissions = (String[]) permissionList.toArray(new String[permissionList.size()]);
+            String[] unauthorizedMorePermissions = permissionList.toArray(new String[permissionList.size()]);
             if (isFirst)// 用户之前已拒绝过权限申请
                 callBack.onUserHasAlreadyTurnedDownAndDontAsk(unauthorizedMorePermissions);
             else       // 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
@@ -167,11 +161,8 @@ public class PermissionsUtils {
      * 判断权限是否申请成功
      */
     public static boolean isPermissionRequestSuccess(int[] grantResults) {
-        if (grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            return true;
-        else
-            return false;
+        return grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED;
     }
 
     /**

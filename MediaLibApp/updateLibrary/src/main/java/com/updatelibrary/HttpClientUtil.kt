@@ -14,7 +14,7 @@ object HttpClientUtil {
                 if (null == syncClient) {
                     syncClient = SyncHttpClient()
                     syncClient!!.setTimeout(120 * 1000)
-                    syncClient!!.setMaxConnections(60)
+                    syncClient!!.maxConnections = 60
                 }
             }
             return syncClient

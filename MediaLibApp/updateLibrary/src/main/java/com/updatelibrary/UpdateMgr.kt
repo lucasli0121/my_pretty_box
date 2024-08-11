@@ -99,7 +99,7 @@ class UpdateMgr(private val mContext: Context) : TextHttpResponseHandler() {
         if (null != mHashMap) {
             val ver = mHashMap!!["version"]
             if (!ver.isNullOrEmpty()) {
-                val serviceCode = Integer.valueOf(ver!!)
+                val serviceCode = Integer.valueOf(ver)
                 if (serviceCode > versionCode) {
                     return true
                 }
@@ -140,7 +140,7 @@ class UpdateMgr(private val mContext: Context) : TextHttpResponseHandler() {
             _cancel = true
         }
         mDownloadDialog = builder.create()
-        (mDownloadDialog as AlertDialog)?.show()
+        (mDownloadDialog as AlertDialog).show()
         downloadApk()
     }
 
@@ -152,7 +152,7 @@ class UpdateMgr(private val mContext: Context) : TextHttpResponseHandler() {
         override fun run() {
             try {
                 val url = mHashMap!!["url"] ?: return
-                _savePath = mContext?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString()
+                _savePath = mContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString()
 //                    val sdpath = Environment.getExternalStorageDirectory().toString() + "/"
 //                    _savePath = sdpath + "download"
                 var apkName = mHashMap!!["name"]

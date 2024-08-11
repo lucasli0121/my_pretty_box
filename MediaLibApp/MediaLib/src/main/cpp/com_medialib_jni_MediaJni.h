@@ -42,7 +42,16 @@ extern "C"
 JNIEXPORT void JNICALL
 Java_com_medialib_jni_MediaJni_testMediaCodec(JNIEnv *, jobject, jstring , jstring );
 
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_medialib_jni_MediaJni_putTestMediaFile(JNIEnv *env, jobject thiz, jstring test_file);
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_medialib_jni_MediaJni_stopTestMedia(JNIEnv *env, jobject thiz);
+
 #ifdef __cplusplus
 }
 #endif
 #endif
+

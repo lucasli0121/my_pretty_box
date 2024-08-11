@@ -3,8 +3,6 @@ package com.media.demo;
 import android.app.Activity;
 import android.app.Application;
 
-import com.meihu.beautylibrary.MHSDK;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -37,8 +35,7 @@ public class MainApplication extends Application {
         super.onCreate();
         INSTANCE = this;
 
-        MHSDK.init(this,"3db63f3b4b73d75062fdb773550b4de2","e614cd56c03a085456b2f4a94c299863");
-        //initExceptionHandler();
+//        MHSDK.init(this,"3db63f3b4b73d75062fdb773550b4de2","e614cd56c03a085456b2f4a94c299863");
     }
 
 

@@ -200,7 +200,7 @@ class WriteView(context: Context?, attrs: AttributeSet?) : DrawBaseView(context,
             var bm = initBitmapBuf(false)
             touchCanvas = Canvas(bm!!)
             synchronized(bmLst) {
-                bmLst.add(bm!!)
+                bmLst.add(bm)
             }
         }
         if (ptLst.isEmpty()) {

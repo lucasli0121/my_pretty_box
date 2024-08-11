@@ -30,11 +30,13 @@ android {
             path="CMakeLists.txt"
         }
     }
+
 //    sourceSets {
 //        main {
-//            jniLibs.srcDirs = ['jniLibs']
+//            jniLibs.srcDirs = ['src/main/jniLibs']
 //        }
 //    }
+
     buildTypes {
         release {
             //混淆

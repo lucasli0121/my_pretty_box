@@ -26,6 +26,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -43,25 +44,28 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion Libs.Compose.kotlinCompilerVersion
+        kotlinCompilerExtensionVersion Libs.Compose.compilerVersion
     }
     repositories {
         flatDir {
-            dirs '../mhui/libs', 'libs'
+            dirs '../byted/libs', 'libs'
         }
+    }
+    packagingOptions {
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
     }
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
-    api fileTree(include: ['*.aar'], dir: 'aars')
+//    api fileTree(dir: 'libs', include: ['*.jar'])
+//    api fileTree(include: ['*.aar'], dir: 'aars')
 
     implementation(platform(Libs.Compose.composeBom))
     implementation(platform(Libs.Kotlin.kotlinBom))
     implementation Libs.AndroidX.coreKtx
     implementation Libs.AndroidX.appcompat
     implementation Libs.AndroidX.constraintLayout
-    implementation Libs.AndroidX.annotation
 
     implementation(Libs.Kotlin.kotlinStdlib)
     implementation Libs.Coroutines.android
@@ -99,10 +103,19 @@ dependencies {
     }
     implementation('com.github.humorousz:FrameSequenceDrawable:1.0.1-SNAPSHOT')
 
+    // 先注释掉阿里的库吧
+    // 此处修改：根据自身项目需要，指定依赖的菜单组件sdk
+    implementation("com.aliyun.maliang.android:queen_menu:6.8.0-official-pro-tiny")
+    // 此处修改：根据自身项目需要，指定依赖的sdk版本
+    implementation("com.aliyun.maliang.android:queen:6.8.0-official-pro")
+
+    // 可选，若采用AIO方式接入，则需要引入，接入更简单，方式参见CameraV6AIOTextureRender类
+    implementation("com.aliyun.maliang.android:queen_aio_framework:6.7.0-official")
+
     implementation project(':MediaLib')
-    implementation project(':mhui')
+    implementation project(':byted')
+//    implementation project(':mhui')
     implementation project(path: ':updateLibrary')
-//    api(name:'MHSDK-4.2.1', ext:'aar')
 
     testImplementation Libs.junit
     androidTestImplementation Libs.AndroidX.Test.Ext.junit

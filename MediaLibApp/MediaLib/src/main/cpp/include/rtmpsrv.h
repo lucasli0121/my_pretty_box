@@ -2,7 +2,7 @@
  * Author: liguoqiang
  * Date: 2023-12-22 20:09:51
  * LastEditors: liguoqiang
- * LastEditTime: 2024-02-14 10:33:01
+ * LastEditTime: 2024-07-23 10:36:12
  * Description: 
 ********************************************************************************/
 #ifndef __RTMP_SRV_H__
@@ -56,6 +56,7 @@ void closeRtmpServer(RTMP_SERVER *rtmpServer);
 void setRtmpVideoCallback(VideoCallbackFunc videoFunc, void *user_data);
 void setRtmpAudioCallback(AudioCallbackFunc audioFunc, void *user_data);
 void setRtmpBeginPublishCallback(BeginPublishFunc beginPublishFunc, void *user_data);
+void setExitPublishThreadCallback(ExitPublishThreadFunc exitPublishThreadFunc, void *user_data);
 void setRtmpSpsPpsCallback(SpsPpsCallbackFunc spsPpsFunc, void *user_data);
 int getRtmpMetaData(char** metaData);
 void getRtmpDataFrame(MetaData *metaData);

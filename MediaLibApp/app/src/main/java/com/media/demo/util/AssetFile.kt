@@ -13,10 +13,12 @@ import android.widget.ImageView
 import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
 import com.media.demo.R
+import java.io.BufferedInputStream
 import java.io.BufferedReader
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.InputStreamReader
 
@@ -26,18 +28,44 @@ object AssetFile {
     private const val BUFFER_SIZE = 1024 * 400
     private const val pkgName = "com.media.demo"
     fun assetSdPath(context: Context?): String {
-        return context?.getExternalFilesDir(null)?.absolutePath + "/";
+        return context?.getExternalFilesDir(null)?.absolutePath + "/"
     }
 
     fun getMediaLogFile(context: Context): String {
         return assetSdPath(context) + "medialib.log"
     }
-    fun getInputVideoFile(context: Context): String {
-        return assetSdPath(context) + "test.264"
+    fun getSampleVideoFile(context: Context): String? {
+        val asset = context.assets
+        try {
+            val inputStream = BufferedInputStream(asset.open("test.264"))
+            val b = ByteArray(inputStream.available())
+            inputStream.read(b)
+            inputStream.close()
+            val outFileName = assetSdPath(context) + "test.264"
+            val outFile = FileOutputStream(File(outFileName))
+            outFile.write(b)
+            outFile.close()
+            return outFileName
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
+    fun getDefaultConfig(context: Context): String? {
+        try {
+            val fIn = BufferedInputStream(context.assets.open("box.json"))
+            val b = ByteArray(fIn.available())
+            fIn.read(b)
+            fIn.close()
+            return String(b)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
     }
 
     fun getOutputVideoFile(context: Context): String {
-        return assetSdPath(context) + "output.yuv"
+        return assetSdPath(context) + "output.264"
     }
 
     fun readJsonConfig(context: Context?): String {
@@ -54,6 +82,7 @@ object AssetFile {
         }
         return result
     }
+
     fun readVersion(context: Context?): String {
         var ver = "pad_std"
         try {
@@ -92,7 +121,7 @@ object AssetFile {
         }catch (e: Exception) {
             Log.e(Tag, e.toString())
             return false
-        } catch (e: java.lang.UnsatisfiedLinkError) {
+        } catch (e: UnsatisfiedLinkError) {
             Log.e(Tag, e.toString())
             return false
         }

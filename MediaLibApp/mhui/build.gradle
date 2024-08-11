@@ -25,11 +25,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-}
 
-repositories {
-    flatDir {
-        dirs 'libs'
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 
@@ -49,7 +49,7 @@ dependencies {
     implementation 'com.lzy.net:okgo:3.0.4'
 
 //    implementation(name:'MHSDK-4.2.1', ext:'aar')
-    api(name:'MHSDK-4.2.1', ext:'aar')
+    api(name: 'MHSDK-4.2.1', ext:'aar')
 
     testImplementation Libs.junit
     androidTestImplementation Libs.AndroidX.Test.Ext.junit

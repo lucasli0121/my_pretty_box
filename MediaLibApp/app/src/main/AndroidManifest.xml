@@ -40,6 +40,17 @@
         android:sharedUserId="android.uid.system"
         android:theme="@style/AppTheme"
         tools:targetApi="tiramisu">
+
+        <meta-data
+            android:name="com.aliyun.alivc_license.licensekey"
+            android:value="xPMJWgn5SHVkgHZRf2d6492bfc980459b9ff8eb74ef495329"/>
+        <!--            android:value="jPQi6mpm9aR1ZgqRp323d44b4e01f433b811685219b9bf4a1" />-->
+
+
+        <meta-data
+            android:name="com.aliyun.alivc_license.licensefile"
+            android:value="assets/cert/AliVideoCert-com_media_demo-20240718140715.crt"/>
+
         <activity android:name="com.media.demo.MainActivity"
             android:exported="true">
             <intent-filter>

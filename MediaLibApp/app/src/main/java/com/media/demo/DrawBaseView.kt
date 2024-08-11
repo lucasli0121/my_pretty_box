@@ -41,9 +41,9 @@ open class DrawBaseView(context: Context?, attrs: AttributeSet?) : SurfaceView(c
         if(width > 0 && height > 0) {
             bm = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
             if(bm != null) {
-                bm?.setHasAlpha(true)
+                bm.setHasAlpha(true)
                 if(initCanvas) {
-                    bmCanvas = Canvas(bm!!)
+                    bmCanvas = Canvas(bm)
                 }
             }
         }

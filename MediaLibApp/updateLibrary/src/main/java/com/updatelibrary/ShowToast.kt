@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.Gravity
 import android.widget.Toast
 
-class ShowToast() {
+class ShowToast {
 
     companion object {
         private const val THIS_FILE = "ShowToast"

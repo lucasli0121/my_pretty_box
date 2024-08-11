@@ -21,11 +21,11 @@ object Versions {
     const val buildToolsVersion = "33.0.1"
     const val minSdkVersion = 29
     const val targetSdkVersion = 32
-    const val versionCode = 202405173
-    const val versionName = "1.1.11.5"
+    const val versionCode = 202408050
+    const val versionName = "1.1.11.25"
 
     const val gradleVersion = "8.1.1"
-    const val kotlinVersion = "1.9.0"
+    const val kotlinVersion = "1.9.24"
     const val gradleBintrayVersion = "1.+"
     const val mavenGradleVersion = "2.1"
     const val navigationVersion =  "2.5.3"
@@ -45,8 +45,8 @@ object Libs {
 
     object Compose {
         const val snapshot = ""
-        const val kotlinCompilerVersion = "1.5.2"
-        const val composeBom = "androidx.compose:compose-bom:2023.08.00"
+        const val compilerVersion = "1.5.14"
+        const val composeBom = "androidx.compose:compose-bom:2024.06.00"
 
         const val foundation = "androidx.compose.foundation:foundation"
         const val foundationLayout = "androidx.compose.foundation:foundation-layout"
@@ -80,8 +80,8 @@ object Libs {
     }
 
     object Material {
-        const val material3 = "androidx.compose.material3:material3:1.0.1"
-        const val material = "com.google.android.material:material:1.6.0-alpha02"
+        const val material3 = "androidx.compose.material3:material3:1.2.1"
+        const val material = "androidx.compose.material:material:1.6.8"
     }
     object Accompanist {
         private const val version = "0.32.0"
@@ -89,25 +89,25 @@ object Libs {
         const val swipeRefresh = "com.google.accompanist:accompanist-swiperefresh:$version"
     }
     object AndroidX {
-        const val appcompat = "androidx.appcompat:appcompat:1.6.1"
-        const val coreKtx = "androidx.core:core-ktx:1.10.1"
+        const val appcompat = "androidx.appcompat:appcompat:1.7.0"
+        const val coreKtx = "androidx.core:core-ktx:1.13.1"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
-        const val annotation = "androidx.annotation:annotation:1.6.0"
-        const val recyclerview = "androidx.recyclerview:recyclerview:1.2.1"
+        const val annotation = "androidx.annotation:annotation:1.8.0"
+        const val recyclerview = "androidx.recyclerview:recyclerview:1.3.2"
         const val legacy = "androidx.legacy:legacy-support-v4:1.0.0"
         object Activity {
-            const val activityCompose = "androidx.activity:activity-compose:1.6.1"
+            const val activityCompose = "androidx.activity:activity-compose:1.9.0"
         }
 
         object Navigation {
-            private const val version = "2.5.3"
+            private const val version = "2.7.7"
             const val fragmentKtx = "androidx.navigation:navigation-fragment-ktx:$version"
             const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
             const val componse = "androidx.navigation:navigation-compose:$version"
             const val testing = "androidx.navigation:navigation-testing:$version"
         }
         object Lifecycle {
-            private const val version = "2.6.2"
+            private const val version = "2.8.2"
             const val lifeRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
             const val livedataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
             const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"

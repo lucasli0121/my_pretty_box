@@ -9,7 +9,7 @@
  * Author: liguoqiang
  * Date: 2023-12-23 23:32:02
  * LastEditors: liguoqiang
- * LastEditTime: 2024-04-26 08:53:45
+ * LastEditTime: 2024-07-23 10:54:45
  * Description: 
 ********************************************************************************/
 #ifndef __RTMP_SRV_PROTO_H__
@@ -25,6 +25,7 @@ extern "C" {
 typedef void (*VideoCallbackFunc)(const char *data, int size, unsigned long timestamp, uint8_t absTimestamp, int key, void* user_data);
 typedef void (*AudioCallbackFunc)(const char *data, int size, unsigned long timestamp, uint8_t absTimestamp, void* user_data);
 typedef void (*BeginPublishFunc)(void* user_data);
+typedef void (*ExitPublishThreadFunc)(void* user_data);
 typedef void (*SpsPpsCallbackFunc)(const char *sps, int spsSize, const char *pps, int ppsSize, void* user_data);
 
 enum
@@ -54,6 +55,7 @@ typedef struct
   RtmpMutex *mutex;
   int needRawVideo;
   BeginPublishFunc beginPublishFunc;
+  ExitPublishThreadFunc exitPublishThreadFunc;
   VideoCallbackFunc videoFunc;
   AudioCallbackFunc audioFunc;
   SpsPpsCallbackFunc spsPpsFunc;
